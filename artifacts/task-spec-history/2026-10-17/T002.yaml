@@ -1,0 +1,47 @@
+schema_version: '1.0'
+task_id: T002
+title: Retry-safe auction settlement
+kind: backend_change
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
+problem_description: Select an incremental settlement extension after reviewing existing
+  worker behavior.
+expected_behavior:
+- Repeated settlement attempts preserve one final ownership and payment outcome
+existing_invariants:
+- id: settlement-once
+  definition: Settlement retry does not duplicate transfers or leave active reservations.
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/auction/service.go:254,267;
+    internal/postgres/research_test.go:365
+relevant_repository_areas:
+- internal/auction/service.go
+- internal/auction/worker.go
+- internal/postgres/auction_repo.go
+- internal/postgres/research_test.go
+setup_requirements:
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- Duplicate payout
+- Winner reservation not released
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: AuctionServiceImpl.EndAuction and EndExpiredAuctions already
+  perform transaction-wrapped settlement. TestResearchSettlement checks repeated/concurrent
+  settlement and persisted effects.
+novel_change_assessment: Retry safety alone is existing behavior; choose a new settlement
+  capability or retire this task.

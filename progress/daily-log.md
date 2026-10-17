@@ -1,5 +1,40 @@
 # Daily research log
 
+## 2026-10-18 — user-authorized fix integration and publication
+
+The user requested fixing and pushing remaining defects. Integrated Dragon Market's wallet branch
+into its current deployment code as `f4ba211`, removing the ineffective Git link and fixing the review
+initializer's ten-migration assumption and stale defect notice. Tests verify v2 startup/restart and
+data-preserving refusal of legacy review databases. The clean Docker image passed fifteen real
+gateway/browser/SQL/restart checks; all three deliberate wallet faults were rejected. Advanced the
+operational research pin deliberately, preserving old reports and the prior candidate manifest.
+Task packages retain their exact `58913f2` starts. Independent human approval remains pending.
+
+An initial setup attempt fetched into the research repository instead of the ignored subject clone;
+the unpublished SHA could not be fetched from origin and the pin remained unchanged. The subsequent
+check honestly recorded another old-pin execution. Corrected the fetch target, then set up and verified
+the intended integration SHA. No source evidence or prior run was overwritten.
+
+## 2026-10-18 — repaired candidate and two executable review drafts
+
+Verified candidate `58913f27161296bab0d3d223e7452a370cba580d` separately from deployment merge
+`52a24b4`, whose top-level wallet is unchanged. Fresh build/full tests/daily/race/vet passed.
+Old pin and evidence remain intact; human baseline approval is pending. Dates use Asia/Tehran;
+machine execution timestamps use UTC.
+
+Constructed T001 purchase-service retry and T002 cancellation retry as new behavior. Held checks use
+separate fixtures, SQL snapshots, audit counts, contention and injected persistence failures. Each
+reference starts from the same candidate. Feature-passing faults violate state invariants. The first
+construction run mistakenly included both tasks' features in each single-task full suite; those
+failures and the corrected task-filtered runs are retained privately. Later coverage adds concurrent
+first cancellation and rejection of outbid, expired and winning bids. These are development checks,
+never agent observations.
+
+Private patches, tests, raw logs, evaluator and source bundle remain outside the public checkout.
+Public summaries, explicit exports, contracts and prompt pairs are ready for independent review.
+Actual agent containment/integration remain unverified. The targeted PGS/LISA comparison narrows
+the question; it establishes no priority or effectiveness result. See [the review index](../docs/review-ready-package.md).
+
 ## 2026-10-17 — infrastructure initialization
 
 Time spent: TO RECORD by researcher (automated build duration is not researcher effort).

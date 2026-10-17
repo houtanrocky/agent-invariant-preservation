@@ -1,0 +1,219 @@
+{
+  "label": "SUBJECT BASELINE VERIFICATION \u2014 NOT A CODING-AGENT EXPERIMENT",
+  "baseline_commit": "58913f27161296bab0d3d223e7452a370cba580d",
+  "configured_study_pin": "162c5cab9fa886445dd102f4a99961027f90aebb",
+  "human_approval": "pending",
+  "origin_url": "https://github.com/houtanrocky/dragon-market",
+  "started_at": "2026-10-17T22:33:03.730747+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.9",
+  "go": {
+    "command": [
+      "go",
+      "version"
+    ],
+    "exit_code": 0,
+    "stdout": "go version go1.26.0 windows/amd64",
+    "stderr": ""
+  },
+  "go_environment": {
+    "command": [
+      "go",
+      "env",
+      "-json",
+      "GOVERSION",
+      "GOOS",
+      "GOARCH",
+      "CGO_ENABLED",
+      "CC"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n\t\"CC\": \"gcc\",\n\t\"CGO_ENABLED\": \"1\",\n\t\"GOARCH\": \"amd64\",\n\t\"GOOS\": \"windows\",\n\t\"GOVERSION\": \"go1.26.0\"\n}",
+    "stderr": ""
+  },
+  "docker_server": {
+    "command": [
+      "docker",
+      "version",
+      "--format",
+      "{{json .Server}}"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"Platform\":{\"Name\":\"Docker Desktop 4.58.0 (216728)\"},\"Version\":\"29.1.5\",\"ApiVersion\":\"1.52\",\"MinAPIVersion\":\"1.44\",\"Os\":\"linux\",\"Arch\":\"amd64\",\"Components\":[{\"Name\":\"Engine\",\"Version\":\"29.1.5\",\"Details\":{\"ApiVersion\":\"1.52\",\"Arch\":\"amd64\",\"BuildTime\":\"Fri Jan 16 12:48:42 2026\",\"Experimental\":\"false\",\"GitCommit\":\"3b01d64\",\"GoVersion\":\"go1.25.6\",\"KernelVersion\":\"6.6.87.2-microsoft-standard-WSL2\",\"MinAPIVersion\":\"1.44\",\"Os\":\"linux\"}},{\"Name\":\"containerd\",\"Version\":\"v2.2.1\",\"Details\":{\"GitCommit\":\"dea7da592f5d1d2b7755e3a161be07f43fad8f75\"}},{\"Name\":\"runc\",\"Version\":\"1.3.4\",\"Details\":{\"GitCommit\":\"v1.3.4-0-gd6d73eb8\"}},{\"Name\":\"docker-init\",\"Version\":\"0.19.0\",\"Details\":{\"GitCommit\":\"de40ad0\"}}],\"GitCommit\":\"3b01d64\",\"GoVersion\":\"go1.25.6\",\"KernelVersion\":\"6.6.87.2-microsoft-standard-WSL2\",\"BuildTime\":\"2026-01-16T12:48:42.000000000+00:00\"}",
+    "stderr": ""
+  },
+  "postgres_image_before": {
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "postgres:16-alpine",
+      "--format",
+      "{{json .RepoDigests}} {{.Id}}"
+    ],
+    "exit_code": 0,
+    "stdout": "[\"postgres@sha256:e013e867e712fec275706a6c51c966f0bb0c93cfa8f51000f85a15f9865a28cb\"] sha256:e013e867e712fec275706a6c51c966f0bb0c93cfa8f51000f85a15f9865a28cb",
+    "stderr": ""
+  },
+  "input_sha256": {
+    "go.mod": "34d6491907a50f38062c2b419a6e77a5a1690831da0d783a9f91d045a5995d03",
+    "go.sum": "36036b994101f626ea17980a6e91d7e317ebedcb639489573674c54d5f29170b",
+    "internal/postgres/setup_test.go": "5b8f7ca91033008b0295a476a1d1326c44b7b42dcd366c09930f86b20a769323"
+  },
+  "checks": [
+    {
+      "name": "build",
+      "command": [
+        "go",
+        "build",
+        "-mod=readonly",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:33:04.180814+00:00",
+      "timeout_seconds": 600,
+      "exit_code": 0,
+      "execution_status": "completed",
+      "duration_seconds": 2.069384099999297,
+      "ended_at": "2026-10-17T22:33:06.250200+00:00",
+      "logs": {
+        ".local/baselines/20261017T223303Z-8d6130cd/build.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        ".local/baselines/20261017T223303Z-8d6130cd/build.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "tests",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:33:06.252156+00:00",
+      "timeout_seconds": 600,
+      "exit_code": 0,
+      "execution_status": "completed",
+      "duration_seconds": 16.214035600001807,
+      "ended_at": "2026-10-17T22:33:22.466194+00:00",
+      "logs": {
+        ".local/baselines/20261017T223303Z-8d6130cd/tests.stdout.log": "5888ae305be80a175a9910459739d667847795b8051fc71998d0b85f4296374b",
+        ".local/baselines/20261017T223303Z-8d6130cd/tests.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "test_events": {
+        "passed": 107,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "known_issue",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=2m",
+        "./internal/postgres",
+        "-run",
+        "^TestDailyLimit"
+      ],
+      "started_at": "2026-10-17T22:33:22.482860+00:00",
+      "timeout_seconds": 600,
+      "exit_code": 0,
+      "execution_status": "completed",
+      "duration_seconds": 9.113344400000642,
+      "ended_at": "2026-10-17T22:33:31.596207+00:00",
+      "logs": {
+        ".local/baselines/20261017T223303Z-8d6130cd/known_issue.stdout.log": "fc4056b52a461f34bee2ccb79048f98c6336ba8546cf80384af03e1a93af0c1d",
+        ".local/baselines/20261017T223303Z-8d6130cd/known_issue.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "test_events": {
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      "defect_reproduced": false,
+      "interpretation": "Repair regression assertions; inspect named tests and persisted-state assertions."
+    },
+    {
+      "name": "race",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-race",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:33:31.615914+00:00",
+      "timeout_seconds": 600,
+      "exit_code": 0,
+      "execution_status": "completed",
+      "duration_seconds": 21.856736899997486,
+      "ended_at": "2026-10-17T22:33:53.472650+00:00",
+      "logs": {
+        ".local/baselines/20261017T223303Z-8d6130cd/race.stdout.log": "b5f5ee41712f262b2e2cc505f30eeeb993fdad895a63e162159d481b00e2a83d",
+        ".local/baselines/20261017T223303Z-8d6130cd/race.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "test_events": {
+        "passed": 107,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "-mod=readonly",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:33:53.487221+00:00",
+      "timeout_seconds": 600,
+      "exit_code": 0,
+      "execution_status": "completed",
+      "duration_seconds": 0.855661900000996,
+      "ended_at": "2026-10-17T22:33:54.342886+00:00",
+      "logs": {
+        ".local/baselines/20261017T223303Z-8d6130cd/vet.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        ".local/baselines/20261017T223303Z-8d6130cd/vet.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "postgres_image_after": {
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "postgres:16-alpine",
+      "--format",
+      "{{json .RepoDigests}} {{.Id}}"
+    ],
+    "exit_code": 0,
+    "stdout": "[\"postgres@sha256:e013e867e712fec275706a6c51c966f0bb0c93cfa8f51000f85a15f9865a28cb\"] sha256:e013e867e712fec275706a6c51c966f0bb0c93cfa8f51000f85a15f9865a28cb",
+    "stderr": ""
+  },
+  "subject_status_after": "",
+  "ended_at": "2026-10-17T22:33:54.589677+00:00",
+  "all_commands_passed": true,
+  "interpretation": "Automated verification only; independent human baseline approval remains pending.",
+  "original_report_sha256": "c8e749c3c1d9b8a7b1276fbc05056581da5c9f264c1082ae5a849addde8af585",
+  "archived_logs": {
+    "build.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "known_issue.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "known_issue.stdout.txt": "fc4056b52a461f34bee2ccb79048f98c6336ba8546cf80384af03e1a93af0c1d",
+    "race.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "race.stdout.txt": "b5f5ee41712f262b2e2cc505f30eeeb993fdad895a63e162159d481b00e2a83d",
+    "tests.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests.stdout.txt": "5888ae305be80a175a9910459739d667847795b8051fc71998d0b85f4296374b",
+    "vet.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vet.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

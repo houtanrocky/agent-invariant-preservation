@@ -1,0 +1,27 @@
+{
+  "task_id": "T001",
+  "baseline_commit": "58913f27161296bab0d3d223e7452a370cba580d",
+  "role": "invariant",
+  "command": [
+    "go",
+    "test",
+    "-mod=readonly",
+    "-json",
+    "-count=1",
+    "-timeout=5m",
+    "./internal/postgres",
+    "-run",
+    "^TestT001Invariant"
+  ],
+  "executed_at": "2026-10-17T22:41:56.795359+00:00",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "reviewer": "Codex automated execution; not independent human review",
+  "artifacts": [
+    {
+      "path": "benchmark/packages/T001/validation.json",
+      "sha256": "9756a3f417622f8ec8180e5be522cb12792c465b62854c404d646e7e94e12a1d"
+    }
+  ],
+  "rationale": "Existing invariants pass before modification; requested feature fails before, passes on reference; mutant builds and passes feature checks but violates held persisted-state assertions. Raw logs are externally held and hashed in the summary."
+}

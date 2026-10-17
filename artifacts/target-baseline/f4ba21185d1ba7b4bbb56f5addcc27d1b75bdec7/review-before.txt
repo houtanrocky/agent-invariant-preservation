@@ -1,0 +1,9 @@
+{"Time":"2026-10-18T02:18:23.041642+03:30","Action":"start","Package":"market-dragon/internal/postgres"}
+{"Time":"2026-10-18T02:18:27.6707379+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestReviewDatabaseInitializationSafety"}
+{"Time":"2026-10-18T02:18:27.6707379+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestReviewDatabaseInitializationSafety","Output":"=== RUN   TestReviewDatabaseInitializationSafety\n"}
+{"Time":"2026-10-18T02:18:27.8191586+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestReviewDatabaseInitializationSafety","Output":"    review_initialization_test.go:55: expected 10 original migrations, got 11\n"}
+{"Time":"2026-10-18T02:18:27.9389304+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestReviewDatabaseInitializationSafety","Output":"--- FAIL: TestReviewDatabaseInitializationSafety (0.27s)\n"}
+{"Time":"2026-10-18T02:18:27.9389304+03:30","Action":"fail","Package":"market-dragon/internal/postgres","Test":"TestReviewDatabaseInitializationSafety","Elapsed":0.27}
+{"Time":"2026-10-18T02:18:27.9389304+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"FAIL\n"}
+{"Time":"2026-10-18T02:18:28.6284518+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"FAIL\tmarket-dragon/internal/postgres\t5.587s\n"}
+{"Time":"2026-10-18T02:18:28.6284518+03:30","Action":"fail","Package":"market-dragon/internal/postgres","Elapsed":5.587}

@@ -1,8 +1,9 @@
 # Human reference implementations — evaluator only
 
-No reference implementations exist yet. Store each future patch as TASK-ID/reference.patch with a
-review note naming the human reviewer, baseline SHA, changed behavior, command results and hashes.
-Reference solutions are human work and must never be labeled agent outputs.
+T001 and T002 now have assistant-authored draft references in the external private evaluator directory,
+located through ignored config/evaluator.local.yaml. No reference patch belongs in this public folder.
+Public packages retain artifact hashes, execution summaries and pending human-review checklists.
 
 Require feature and invariant tests to pass; capture evidence reports using the task-evidence schema.
-Exclude this entire directory from agent access. Next: implement and review the first two accepted changes.
+Never label reference construction as an observed coding-agent run or as completed human review.
+Next: independently inspect and reproduce both references before recording named human approval.

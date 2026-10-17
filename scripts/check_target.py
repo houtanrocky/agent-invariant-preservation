@@ -43,6 +43,10 @@ def observe(command: list[str], cwd: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--timeout-seconds", type=int, default=600)
+    parser.add_argument(
+        "--candidate-commit",
+        help="Verify an exact candidate without approving or changing the study pin",
+    )
     args = parser.parse_args()
     if args.timeout_seconds <= 0:
         parser.error("--timeout-seconds must be positive")
@@ -50,7 +54,8 @@ def main() -> int:
     target = root / ".local/dragon-market"
     config = read_yaml(root / "config/target-repository.yaml")
     sha = git(target, "rev-parse", "HEAD")
-    if sha != config["baseline_commit"] or git(target, "status", "--porcelain"):
+    expected_sha = args.candidate_commit or config["baseline_commit"]
+    if sha != expected_sha or git(target, "status", "--porcelain"):
         raise ResearchError("Subject must be clean and match the configured exact commit.")
     if git(target, "remote", "get-url", "origin") != config["origin_url"]:
         raise ResearchError("Subject origin does not match configuration.")
@@ -60,6 +65,8 @@ def main() -> int:
     report = {
         "label": "SUBJECT BASELINE VERIFICATION — NOT A CODING-AGENT EXPERIMENT",
         "baseline_commit": sha,
+        "configured_study_pin": config["baseline_commit"],
+        "human_approval": "pending",
         "origin_url": config["origin_url"],
         "started_at": datetime.now(timezone.utc).isoformat(),
         "platform": platform.platform(),
@@ -100,7 +107,11 @@ def main() -> int:
                 "-timeout=2m",
                 "./internal/postgres",
                 "-run",
-                "^TestKnownIssuePriorDayReleaseReducesTodaySpending$",
+                (
+                    "^TestDailyLimit"
+                    if (target / "internal/postgres/daily_limit_test.go").is_file()
+                    else "^TestKnownIssuePriorDayReleaseReducesTodaySpending$"
+                ),
             ],
         ),
         (
@@ -151,8 +162,12 @@ def main() -> int:
                 encoding="utf-8", errors="replace"
             )
             entry["interpretation"] = (
-                "A passing characterization reproduces a pre-existing defect; it is not invariant success."
+                "Repair regression assertions; inspect named tests and persisted-state assertions."
+                if (target / "internal/postgres/daily_limit_test.go").is_file()
+                else "A passing characterization reproduces a pre-existing defect; it is not invariant success."
             )
+            if entry["test_events"]["passed"] == 0:
+                entry["execution_status"] = "no_tests_executed"
         report["checks"].append(entry)
         write_json(output / "report.json", report)
         print(f"{name}: exit={entry['exit_code']}, {entry['duration_seconds']:.1f}s", flush=True)
@@ -169,9 +184,12 @@ def main() -> int:
     )
     report["subject_status_after"] = git(target, "status", "--porcelain")
     report["ended_at"] = datetime.now(timezone.utc).isoformat()
-    report["all_commands_passed"] = all(check["exit_code"] == 0 for check in report["checks"])
+    report["all_commands_passed"] = all(
+        check["exit_code"] == 0 and check["execution_status"] == "completed"
+        for check in report["checks"]
+    )
     report["interpretation"] = (
-        "Command success is separate from invariant truth; KNOWN-01 requires task/scope review."
+        "Automated verification only; independent human baseline approval remains pending."
     )
     write_json(output / "report.json", report)
     print(f"Report: {output / 'report.json'}", flush=True)

@@ -16,6 +16,7 @@ from researchctl.analysis import summarize
 from researchctl.demo import smoke
 from researchctl.io import ResearchError, read_json, read_yaml, root_at
 from researchctl.target import setup, worktree
+from researchctl.snapshot import export_snapshot
 from researchctl.validation import load_records, task_check
 
 
@@ -40,6 +41,8 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
     if args.command == "prepare-workspace":
         config = read_yaml(root / "config/target-repository.yaml")
         return {"workspace": str(worktree(root, args.run_id, config["baseline_commit"] or ""))}
+    if args.command == "prepare-snapshot":
+        return export_snapshot(root, args.run_id, args.task)
     if args.command == "list-tasks":
         return [
             {
@@ -108,6 +111,8 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
             / "report.json"
         )
         baseline = read_json(report_path) if report_path.is_file() else None
+        candidate_path = root / "benchmark/manifests/baseline-review.json"
+        candidate = read_json(candidate_path) if candidate_path.is_file() else None
         if baseline and baseline["baseline_commit"] != target["baseline_commit"]:
             raise ResearchError("Stored baseline report identifies a different commit.")
         pending_baseline = (
@@ -116,10 +121,24 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
             else ["baseline execution/investigation"]
         )
         return {
-            "phase": "foundation; protocol draft",
+            "phase": (
+                "baseline and task packages; independent human review pending"
+                if candidate
+                else "foundation; protocol draft"
+            ),
             "candidate_tasks": len(tasks),
             "validated_tasks": validated,
             "target": target,
+            "proposed_baseline_review": candidate,
+            "executable_draft_tasks": [
+                task["task_id"]
+                for task in tasks
+                if task["reference_solution_status"] == "draft"
+                and all(
+                    task["evidence"][role]
+                    for role in ("baseline", "reference", "functional", "invariant", "mutant")
+                )
+            ],
             "baseline_verification": (
                 None
                 if baseline is None
@@ -138,8 +157,9 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
             ],
             "blocked_or_future": pending_baseline
             + [
-                "pre-existing invariant defects and task eligibility review",
-                "human reference review",
+                "independent baseline correctness review and approval",
+                "human reference and oracle rationale review",
+                "filesystem/network isolation demonstration and prompt parity review",
                 "real agent integration",
                 "oracle validation",
                 "preregistration freeze",
@@ -166,6 +186,9 @@ def parser() -> argparse.ArgumentParser:
     )
     workspace = sub.add_parser("prepare-workspace")
     workspace.add_argument("run_id")
+    snapshot = sub.add_parser("prepare-snapshot")
+    snapshot.add_argument("run_id")
+    snapshot.add_argument("--task", required=True)
     new = sub.add_parser("new-task")
     new.add_argument("task_id")
     new.add_argument("--title", required=True)

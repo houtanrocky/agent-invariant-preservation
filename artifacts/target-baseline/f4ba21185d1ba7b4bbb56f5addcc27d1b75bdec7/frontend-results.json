@@ -1,0 +1,50 @@
+{
+  "started_at": "2026-10-17T22:50:50.340Z",
+  "commit": "52a24b4319a1ee857a1ebe6752cec932ac824cc9",
+  "platform": "win32",
+  "node": "v24.18.0",
+  "scope": "frontend-only",
+  "results": [
+    {
+      "name": "frontend-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "web",
+      "started_at": "2026-10-17T22:50:50.408Z",
+      "finished_at": "2026-10-17T22:50:55.499Z",
+      "status": "PASS",
+      "exit": 0,
+      "artifact": "artifacts/verification/frontend-typecheck.log"
+    },
+    {
+      "name": "frontend-lint",
+      "command": "npm run lint",
+      "cwd": "web",
+      "started_at": "2026-10-17T22:50:55.502Z",
+      "finished_at": "2026-10-17T22:50:58.416Z",
+      "status": "PASS",
+      "exit": 0,
+      "artifact": "artifacts/verification/frontend-lint.log"
+    },
+    {
+      "name": "frontend-test",
+      "command": "npm run test",
+      "cwd": "web",
+      "started_at": "2026-10-17T22:50:58.417Z",
+      "finished_at": "2026-10-17T22:51:03.113Z",
+      "status": "PASS",
+      "exit": 0,
+      "artifact": "artifacts/verification/frontend-test.log"
+    },
+    {
+      "name": "frontend-build",
+      "command": "npm run build",
+      "cwd": "web",
+      "started_at": "2026-10-17T22:51:03.113Z",
+      "finished_at": "2026-10-17T22:51:07.766Z",
+      "status": "PASS",
+      "exit": 0,
+      "artifact": "artifacts/verification/frontend-build.log"
+    }
+  ],
+  "finished_at": "2026-10-17T22:51:07.767Z"
+}

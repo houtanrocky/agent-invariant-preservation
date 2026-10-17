@@ -1,0 +1,15 @@
+{
+  "proposed_pin": "f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7",
+  "implementation_commit": "07bc7e726c8f8228cd62849ef06054edf4f7e624",
+  "configured_study_pin": "f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7",
+  "status": "integrated repair checks passed; independent human approval pending",
+  "task_packages": [
+    "T001",
+    "T002"
+  ],
+  "subject_bundle_sha256": "3a30e89fd2af2a3fceb5c3e3a79557a31e2e7c8f45fc2a6cc3f9c3986e1449ee",
+  "baseline_report": "artifacts/target-baseline/f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7/report.json",
+  "previous_study_pin": "162c5cab9fa886445dd102f4a99961027f90aebb",
+  "task_starting_commit": "58913f27161296bab0d3d223e7452a370cba580d",
+  "subject_bundle_commit": "58913f27161296bab0d3d223e7452a370cba580d"
+}

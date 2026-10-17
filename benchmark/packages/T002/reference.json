@@ -1,0 +1,25 @@
+{
+  "task_id": "T002",
+  "baseline_commit": "58913f27161296bab0d3d223e7452a370cba580d",
+  "role": "reference",
+  "command": [
+    "go",
+    "test",
+    "-mod=readonly",
+    "-json",
+    "-count=1",
+    "-timeout=5m",
+    "./..."
+  ],
+  "executed_at": "2026-10-17T22:43:19.645008+00:00",
+  "expected_exit_code": 0,
+  "actual_exit_code": 0,
+  "reviewer": "Codex automated execution; not independent human review",
+  "artifacts": [
+    {
+      "path": "benchmark/packages/T002/validation.json",
+      "sha256": "1b5266b3273e099def641cb3812ae7fa9e7151eb46085ffb79c56cd0d80afc73"
+    }
+  ],
+  "rationale": "Existing invariants pass before modification; requested feature fails before, passes on reference; mutant builds and passes feature checks but violates held persisted-state assertions. Raw logs are externally held and hashed in the summary."
+}

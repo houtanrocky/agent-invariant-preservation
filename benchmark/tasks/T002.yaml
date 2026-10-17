@@ -1,47 +1,103 @@
 schema_version: '1.0'
 task_id: T002
-title: Retry-safe auction settlement
+title: Retry-safe bid cancellation
 kind: backend_change
-baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
-problem_description: Select an incremental settlement extension after reviewing existing
-  worker behavior.
+baseline_commit: 58913f27161296bab0d3d223e7452a370cba580d
+problem_description: Extend AuctionServiceImpl.CancelBid(ctx, auctionID, bidID, bidderID)
+  so an already cancelled bid returns nil for the same auction and recorded bidder,
+  including after the deadline or auction settlement. This retry must have no effects.
+  Active bids remain cancellable only under the existing rules. Preserve public signatures,
+  schema, request-key semantics and settlement behavior.
 expected_behavior:
-- Repeated settlement attempts preserve one final ownership and payment outcome
+- The first valid cancellation releases exactly its own active hold and marks only
+  its bid cancelled.
+- Matching cancelled-bid retries return nil before/after expiry and settlement, without
+  any additional release or audit row.
+- Different bidders or auction IDs are rejected; outbid or winning bids cannot be
+  cancelled.
+- Active bids past their deadline or on an ended auction remain rejected.
+- Concurrent retries, unrelated holds and later settlements remain correct; persistence
+  failure rolls back release and audit effects.
 existing_invariants:
-- id: settlement-once
-  definition: Settlement retry does not duplicate transfers or leave active reservations.
-  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/auction/service.go:254,267;
-    internal/postgres/research_test.go:365
+- id: reservation-release-once
+  definition: Each cancelled bid releases its own reserved amount once. Retries preserve
+    every persisted wallet, bid, auction and item row, including unrelated holds and
+    audit rows.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/auction/service.go:CancelBid;
+    internal/postgres/auction_repo.go
+- id: cancellation-authorization
+  definition: A foreign bidder or mismatched auction cannot cancel a bid; outbid and
+    winning bids cannot release reserves or change settlement.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/auction/service.go:CancelBid
+- id: cancellation-atomicity
+  definition: A failed cancellation rolls back bid status, reservation release and
+    wallet audit changes together; settlement conserves gold and transfers ownership
+    only once.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/postgres/tx.go; internal/auction/service.go:EndAuction
 relevant_repository_areas:
 - internal/auction/service.go
-- internal/auction/worker.go
 - internal/postgres/auction_repo.go
-- internal/postgres/research_test.go
+- internal/postgres/tx.go
 setup_requirements:
-- Clean detached checkout at the exact baseline SHA
-- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
-- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
-  1 through 10
-- Review KNOWN-01 and public research-readiness material before accepting task scope
-evaluation_commands: []
-timeout_seconds: 300
+- Candidate SHA and fresh migration 1–11 database; independent human baseline approval
+  still pending.
+- Go 1.26.0 and Docker Linux containers with PostgreSQL 16; all validation uses disposable
+  Testcontainers databases.
+- Trusted evaluator is held externally; locate it with ignored config/evaluator.local.yaml.
+- Both conditions receive identical REQUEST.md, CONTRACT.md and allowlisted snapshot;
+  do not mount this research checkout.
+evaluation_commands:
+- - go
+  - test
+  - -mod=readonly
+  - -json
+  - -count=1
+  - -timeout=5m
+  - ./internal/postgres
+  - -run
+  - ^TestT002Feature
+- - go
+  - test
+  - -mod=readonly
+  - -json
+  - -count=1
+  - -timeout=5m
+  - ./internal/postgres
+  - -run
+  - ^TestT002Invariant
+timeout_seconds: 600
 hidden_evaluation_requirements:
-- Specify independent feature/invariant assertions; keep outside agent mount
-reference_solution_status: not_started
+- Inject the private task-specific oracle only in a fresh trusted evaluator after
+  coding stops.
+- Inspect SQL rows and audit effects, concurrent retries, authorization and injected
+  persistence rollback.
+- Zero daily limits in held task fixtures deliberately exclude repaired spending-policy
+  behavior from task scoring.
+reference_solution_status: draft
 known_failure_cases:
-- Duplicate payout
-- Winner reservation not released
+- Feature succeeds but retries repeat financial effects.
+- Cross-identity retry accepted.
+- A failed mutation leaves partial durable effects.
 validation_status: candidate
 human_reviewer: null
 evidence:
-  baseline: null
-  reference: null
-  functional: null
-  invariant: null
-  mutant: null
+  baseline:
+    path: benchmark/packages/T002/baseline.json
+    sha256: 916e6da611b091daf3a9d6e6cb21221366f8bfb81d9e2a964cd9ba0a517bd9a2
+  reference:
+    path: benchmark/packages/T002/reference.json
+    sha256: 1910b44220480ca99f3e92e119eb32a846252c66c25278a4ac320bd58dc086cf
+  functional:
+    path: benchmark/packages/T002/functional.json
+    sha256: 2f213558a7f0b4f60ed40d9df93a299b655e5ef40f1f7335c22306a8fb5c99bb
+  invariant:
+    path: benchmark/packages/T002/invariant.json
+    sha256: 4b9b2633762a47b34477a1b65bd7d08b6699c2ff7c3f1acbc0e050a2cd005943
+  mutant:
+    path: benchmark/packages/T002/mutant.json
+    sha256: ba55905b271b80df514e7ed83b7981363bd1fcaa593ec8bb90fef23d9766f753
   rationale: null
-availability_assessment: AuctionServiceImpl.EndAuction and EndExpiredAuctions already
-  perform transaction-wrapped settlement. TestResearchSettlement checks repeated/concurrent
-  settlement and persisted effects.
-novel_change_assessment: Retry safety alone is existing behavior; choose a new settlement
-  capability or retire this task.
+availability_assessment: Existing settlement retry safety is implemented. CancelBid
+  rejects an already cancelled bid; post-expiry cancelled retry success is absent.
+novel_change_assessment: Replaces redundant settlement candidate with a new cancellation
+  outcome contract; no daily-limit changes.

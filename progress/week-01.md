@@ -4,10 +4,11 @@ Status: planned; start/end dates and actual hours TO RECORD.
 
 ## Objectives and actionable checklist
 
-- [ ] Read closest full texts and update gap.
+- [x] Targeted full-text method/evaluation comparison of PGS v1/v2 and LISA; gap narrowed on 2026-10-18. Artifact/appendix audit remains pending.
 - [x] Pin and inspect baseline source and tests. Evidence: docs/target-baseline.md and research/subject-inspection.md; KNOWN-01 limits task eligibility.
 - [ ] Map requirements to code/test evidence.
 - [ ] Validate two meaningful new tasks.
+  Two executable draft packages now have automated reference/oracle/mutant evidence; human review remains pending.
 - [ ] Verify one permitted dry run with complete provenance.
 
 ## Expected deliverables

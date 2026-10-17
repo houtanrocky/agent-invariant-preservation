@@ -1,0 +1,295 @@
+{
+  "task_id": "T002",
+  "baseline_commit": "58913f27161296bab0d3d223e7452a370cba580d",
+  "human_review": "pending",
+  "independent_author_review": "not performed",
+  "validation_run_id": "20261017T224133Z-ac065d2e",
+  "commands": {
+    "T002-baseline-feature": {
+      "label": "T002-baseline-feature",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Feature"
+      ],
+      "started_at": "2026-10-17T22:42:48.007304+00:00",
+      "duration_seconds": 7.748313999996753,
+      "exit_code": 1,
+      "logs": {
+        "T002-baseline-feature.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-baseline-feature.stdout.txt": "eac7f21999e005f9f299a437f198e8e671bfa9ce43b2066e3ad89fa341dd0a27"
+      },
+      "test_events": [
+        {
+          "test": "TestT002FeatureRetry",
+          "action": "fail"
+        },
+        {
+          "test": "TestT002FeatureConcurrent",
+          "action": "fail"
+        }
+      ],
+      "assertion_failure": true,
+      "expected_exit_code": 1,
+      "expected_outcome_observed": true
+    },
+    "T002-baseline-invariant": {
+      "label": "T002-baseline-invariant",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Invariant"
+      ],
+      "started_at": "2026-10-17T22:42:55.768884+00:00",
+      "duration_seconds": 7.7147664000003715,
+      "exit_code": 0,
+      "logs": {
+        "T002-baseline-invariant.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-baseline-invariant.stdout.txt": "073d1d1d7072fd851d212ee246560543ee09f844b95cf955c486883540d391d7"
+      },
+      "test_events": [
+        {
+          "test": "TestT002InvariantReplay",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002InvariantRollback",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002InvariantIneligible",
+          "action": "pass"
+        }
+      ],
+      "assertion_failure": false,
+      "expected_exit_code": 0,
+      "expected_outcome_observed": true
+    },
+    "T002-reference-feature": {
+      "label": "T002-reference-feature",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Feature"
+      ],
+      "started_at": "2026-10-17T22:43:03.667539+00:00",
+      "duration_seconds": 7.833721099999821,
+      "exit_code": 0,
+      "logs": {
+        "T002-reference-feature.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-reference-feature.stdout.txt": "be15995c15e48c66f1da4cac04b9a59e7870d87bccdfab1ec8664b0a905fbe00"
+      },
+      "test_events": [
+        {
+          "test": "TestT002FeatureRetry",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002FeatureConcurrent",
+          "action": "pass"
+        }
+      ],
+      "assertion_failure": false,
+      "expected_exit_code": 0,
+      "expected_outcome_observed": true
+    },
+    "T002-reference-invariant": {
+      "label": "T002-reference-invariant",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Invariant"
+      ],
+      "started_at": "2026-10-17T22:43:11.519647+00:00",
+      "duration_seconds": 8.109389699999156,
+      "exit_code": 0,
+      "logs": {
+        "T002-reference-invariant.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-reference-invariant.stdout.txt": "1211154d7ff05a5e498aee5f653a11fa3cada125cc8ace3cc9bda3026a3433a7"
+      },
+      "test_events": [
+        {
+          "test": "TestT002InvariantReplay",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002InvariantRollback",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002InvariantIneligible",
+          "action": "pass"
+        }
+      ],
+      "assertion_failure": false,
+      "expected_exit_code": 0,
+      "expected_outcome_observed": true
+    },
+    "T002-reference-full": {
+      "label": "T002-reference-full",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:43:19.645008+00:00",
+      "duration_seconds": 16.9599163999992,
+      "exit_code": 0,
+      "logs": {
+        "T002-reference-full.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-reference-full.stdout.txt": "eca68c197e2e311de82019ab66d40e12309be9f1fbf62864448a397f99a63b9d"
+      },
+      "expected_outcome_observed": true
+    },
+    "T002-reference-race": {
+      "label": "T002-reference-race",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-race",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002"
+      ],
+      "started_at": "2026-10-17T22:43:36.618187+00:00",
+      "duration_seconds": 11.12672670000029,
+      "exit_code": 0,
+      "logs": {
+        "T002-reference-race.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-reference-race.stdout.txt": "b4edec5ee0590839204d74731cbab6e2bfe8e2d16100e0bd76f4d02aa6eeb28f"
+      },
+      "expected_outcome_observed": true
+    },
+    "T002-reference-vet": {
+      "label": "T002-reference-vet",
+      "command": [
+        "go",
+        "vet",
+        "-mod=readonly",
+        "./..."
+      ],
+      "started_at": "2026-10-17T22:43:47.754433+00:00",
+      "duration_seconds": 1.0704828000016278,
+      "exit_code": 0,
+      "logs": {
+        "T002-reference-vet.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-reference-vet.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "expected_outcome_observed": true
+    },
+    "T002-mutant-feature": {
+      "label": "T002-mutant-feature",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Feature"
+      ],
+      "started_at": "2026-10-17T22:43:48.951520+00:00",
+      "duration_seconds": 8.102351800000179,
+      "exit_code": 0,
+      "logs": {
+        "T002-mutant-feature.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-mutant-feature.stdout.txt": "5e12b5f2083280358afec015ecad88e25576480b2c61e6c77f45835aabb6592e"
+      },
+      "test_events": [
+        {
+          "test": "TestT002FeatureRetry",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002FeatureConcurrent",
+          "action": "pass"
+        }
+      ],
+      "assertion_failure": false,
+      "expected_exit_code": 0,
+      "expected_outcome_observed": true
+    },
+    "T002-mutant-invariant": {
+      "label": "T002-mutant-invariant",
+      "command": [
+        "go",
+        "test",
+        "-mod=readonly",
+        "-json",
+        "-count=1",
+        "-timeout=5m",
+        "./internal/postgres",
+        "-run",
+        "^TestT002Invariant"
+      ],
+      "started_at": "2026-10-17T22:43:57.066164+00:00",
+      "duration_seconds": 7.734205900000234,
+      "exit_code": 1,
+      "logs": {
+        "T002-mutant-invariant.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "T002-mutant-invariant.stdout.txt": "968083d011ff993d91bb19f48d9edb6916ec72997d6325a8c84e8f1dc8f3cf77"
+      },
+      "test_events": [
+        {
+          "test": "TestT002InvariantReplay",
+          "action": "fail"
+        },
+        {
+          "test": "TestT002InvariantRollback",
+          "action": "pass"
+        },
+        {
+          "test": "TestT002InvariantIneligible",
+          "action": "pass"
+        }
+      ],
+      "assertion_failure": true,
+      "expected_exit_code": 1,
+      "expected_outcome_observed": true
+    }
+  },
+  "private_report_sha256": "9e0fa84d8aa2f71e9cd0a599bee0238e16f6ca38f80d73506ad65f50bf4483b7",
+  "private_input_manifest_sha256": "8010af4612df6852ab8d9ac819b68bd62e2cbe6d314da20da890127fc81d730c",
+  "private_assets": {
+    "validate.py": "9f0a269bd48839ae48ae12d996ab79043b6fa5700397350cc6d8dbdf536b44d4",
+    "oracles/tasks_test.go": "d44ac4136d55b934116672bc90031527d1935c86c4cc04dedc9d7e9e4e0f05d3",
+    "references/T002/mutant.patch": "7fb10ed8cdd28e4534c4c50e018dc78a68166d6cfb0808c32f11d116c7b783de",
+    "references/T002/reference.patch": "c3db2010ac520b0f3df10eb59c80f240026f1555d317173f8f7a38b315db8816"
+  },
+  "subject_bundle_sha256": "3a30e89fd2af2a3fceb5c3e3a79557a31e2e7c8f45fc2a6cc3f9c3986e1449ee",
+  "scope": "Automated task validation; no coding-agent observation; same author reference and assertions; human/independent review pending"
+}

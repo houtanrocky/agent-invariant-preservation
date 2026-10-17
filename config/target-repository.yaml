@@ -1,8 +1,8 @@
 origin_url: https://github.com/houtanrocky/dragon-market
-baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
-pin_status: pinned_checks_passed_known_invariant_violation; human review pending
-documentation_observed_on: '2026-10-17'
-documentation_source: https://github.com/houtanrocky/dragon-market/tree/162c5cab9fa886445dd102f4a99961027f90aebb
+baseline_commit: f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7
+pin_status: pinned_integrated_repair_checks_passed; independent human approval pending
+documentation_observed_on: '2026-10-18'
+documentation_source: https://github.com/houtanrocky/dragon-market/tree/f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7
 checkout_directory: .local/dragon-market
 go_requirement: go.mod specifies Go 1.25.0; baseline checks executed with Go 1.26.0
   windows/amd64

@@ -1,0 +1,37 @@
+{"Time":"2026-10-18T02:03:23.6108295+03:30","Action":"start","Package":"market-dragon/internal/postgres"}
+{"Time":"2026-10-18T02:03:28.4708487+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitPriorDayReleaseCannotEraseSpending"}
+{"Time":"2026-10-18T02:03:28.4708487+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitPriorDayReleaseCannotEraseSpending","Output":"=== RUN   TestDailyLimitPriorDayReleaseCannotEraseSpending\n"}
+{"Time":"2026-10-18T02:03:28.7973845+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitPriorDayReleaseCannotEraseSpending","Output":"    daily_limit_test.go:47: first purchase error=daily spending limit reached; final purchase error=daily spending limit reached; persisted debits=300 gold=9700 completed=300 reserved=0 audit rows=2\n"}
+{"Time":"2026-10-18T02:03:28.7981361+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitPriorDayReleaseCannotEraseSpending","Output":"--- PASS: TestDailyLimitPriorDayReleaseCannotEraseSpending (0.33s)\n"}
+{"Time":"2026-10-18T02:03:28.7981361+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitPriorDayReleaseCannotEraseSpending","Elapsed":0.33}
+{"Time":"2026-10-18T02:03:28.7981361+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMixedAgeHoldsAndSettlement"}
+{"Time":"2026-10-18T02:03:28.7981361+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMixedAgeHoldsAndSettlement","Output":"=== RUN   TestDailyLimitMixedAgeHoldsAndSettlement\n"}
+{"Time":"2026-10-18T02:03:29.1484514+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMixedAgeHoldsAndSettlement","Output":"--- PASS: TestDailyLimitMixedAgeHoldsAndSettlement (0.35s)\n"}
+{"Time":"2026-10-18T02:03:29.1484514+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMixedAgeHoldsAndSettlement","Elapsed":0.35}
+{"Time":"2026-10-18T02:03:29.1484514+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitConcurrentReserveAndSpend"}
+{"Time":"2026-10-18T02:03:29.1484514+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitConcurrentReserveAndSpend","Output":"=== RUN   TestDailyLimitConcurrentReserveAndSpend\n"}
+{"Time":"2026-10-18T02:03:29.5006754+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitConcurrentReserveAndSpend","Output":"--- PASS: TestDailyLimitConcurrentReserveAndSpend (0.35s)\n"}
+{"Time":"2026-10-18T02:03:29.5006754+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitConcurrentReserveAndSpend","Elapsed":0.35}
+{"Time":"2026-10-18T02:03:29.5006754+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuditFailureRollsBackDayAndSettlement"}
+{"Time":"2026-10-18T02:03:29.5006754+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuditFailureRollsBackDayAndSettlement","Output":"=== RUN   TestDailyLimitAuditFailureRollsBackDayAndSettlement\n"}
+{"Time":"2026-10-18T02:03:29.7985451+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuditFailureRollsBackDayAndSettlement","Output":"--- PASS: TestDailyLimitAuditFailureRollsBackDayAndSettlement (0.30s)\n"}
+{"Time":"2026-10-18T02:03:29.7985451+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuditFailureRollsBackDayAndSettlement","Elapsed":0.3}
+{"Time":"2026-10-18T02:03:29.7985451+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuctionRolloverCancelAndSettle"}
+{"Time":"2026-10-18T02:03:29.7985451+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuctionRolloverCancelAndSettle","Output":"=== RUN   TestDailyLimitAuctionRolloverCancelAndSettle\n"}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuctionRolloverCancelAndSettle","Output":"--- PASS: TestDailyLimitAuctionRolloverCancelAndSettle (0.53s)\n"}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitAuctionRolloverCancelAndSettle","Elapsed":0.53}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData"}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData","Output":"=== RUN   TestDailyLimitMigrationRejectsLegacyData\n"}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/empty"}
+{"Time":"2026-10-18T02:03:30.3269959+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/empty","Output":"=== RUN   TestDailyLimitMigrationRejectsLegacyData/empty\n"}
+{"Time":"2026-10-18T02:03:30.3416585+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/empty","Output":"--- PASS: TestDailyLimitMigrationRejectsLegacyData/empty (0.01s)\n"}
+{"Time":"2026-10-18T02:03:30.3416585+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/empty","Elapsed":0.01}
+{"Time":"2026-10-18T02:03:30.3416585+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/legacy"}
+{"Time":"2026-10-18T02:03:30.3416585+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/legacy","Output":"=== RUN   TestDailyLimitMigrationRejectsLegacyData/legacy\n"}
+{"Time":"2026-10-18T02:03:30.3503605+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/legacy","Output":"--- PASS: TestDailyLimitMigrationRejectsLegacyData/legacy (0.01s)\n"}
+{"Time":"2026-10-18T02:03:30.3503605+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData/legacy","Elapsed":0.01}
+{"Time":"2026-10-18T02:03:30.3503605+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData","Output":"--- PASS: TestDailyLimitMigrationRejectsLegacyData (0.02s)\n"}
+{"Time":"2026-10-18T02:03:30.3503605+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestDailyLimitMigrationRejectsLegacyData","Elapsed":0.02}
+{"Time":"2026-10-18T02:03:30.3503605+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"PASS\n"}
+{"Time":"2026-10-18T02:03:31.3421393+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"ok  \tmarket-dragon/internal/postgres\t7.731s\n"}
+{"Time":"2026-10-18T02:03:31.3421393+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Elapsed":7.731}

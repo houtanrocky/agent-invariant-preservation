@@ -1,0 +1,35 @@
+2026/10/18 02:21:03 github.com/testcontainers/testcontainers-go - Connected to docker: 
+  Server Version: 29.1.5
+  API Version: 1.52
+  Operating System: Docker Desktop
+  Total Memory: 7940 MB
+  Labels:
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+  Testcontainers for Go Version: v0.43.0
+  Resolved Docker Host: npipe:////./pipe/docker_engine
+  Resolved Docker Socket Path: //var/run/docker.sock
+  Test SessionID: 2a429b038819c19076eed213aebd632579865a3c142b67939ba804355f6d2b5a
+  Test ProcessID: d2718b74-3058-41df-90ab-1dcb3adab874
+2026/10/18 02:21:03 🐳 Creating container for image postgres:16-alpine
+2026/10/18 02:21:04 🐳 Creating container for image testcontainers/ryuk:0.14.0
+2026/10/18 02:21:04 ✅ Container created: 645da6cd81e4
+2026/10/18 02:21:04 🐳 Starting container: 645da6cd81e4
+2026/10/18 02:21:05 ✅ Container started: 645da6cd81e4
+2026/10/18 02:21:05 ⏳ Waiting for container id 645da6cd81e4 image: testcontainers/ryuk:0.14.0. Waiting for: all of: [log message "Started", port 8080/tcp to be listening]
+2026/10/18 02:21:05 Shell not found in container
+2026/10/18 02:21:05 🔔 Container is ready: 645da6cd81e4
+2026/10/18 02:21:05 ✅ Container created: 8d85caaa600e
+2026/10/18 02:21:05 🐳 Starting container: 8d85caaa600e
+2026/10/18 02:21:06 ✅ Container started: 8d85caaa600e
+2026/10/18 02:21:06 ⏳ Waiting for container id 8d85caaa600e image: postgres:16-alpine. Waiting for: all of: [log message "database system is ready to accept connections", port 5432/tcp to be listening]
+2026/10/18 02:21:09 🔔 Container is ready: 8d85caaa600e
+=== RUN   TestDailyLimitMixedAgeHoldsAndSettlement
+    daily_limit_test.go:97: over-limit reserve error=<nil>
+--- FAIL: TestDailyLimitMixedAgeHoldsAndSettlement (0.31s)
+FAIL
+2026/10/18 02:21:09 🐳 Stopping container: 8d85caaa600e
+2026/10/18 02:21:10 ✅ Container stopped: 8d85caaa600e
+2026/10/18 02:21:10 🐳 Terminating container: 8d85caaa600e
+2026/10/18 02:21:10 🚫 Container terminated: 8d85caaa600e
+FAIL	market-dragon/internal/postgres	6.791s
+FAIL

@@ -65,6 +65,8 @@ class ValidationTests(ScratchTest):
         self.task["baseline_commit"] = (
             None  # Explicit unpinned validator fixture, independent of study state.
         )
+        self.task["evidence"] = {role: None for role in self.task["evidence"]}
+        self.task["reference_solution_status"] = "not_started"
 
     def test_candidate_reports_incomplete_gates(self) -> None:
         missing = task_check(ROOT, self.task)

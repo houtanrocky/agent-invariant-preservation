@@ -12,7 +12,8 @@ the research repository commit. Do not amend/rewrite a published research histor
 Use `git status --short`, `git diff --check` and `python scripts/check.py --strict` before committing.
 Do not commit ignored credentials, downloaded source, databases or large private traces. Raw non-sensitive
 records and provenance belong in Git or checksummed artifact storage. Git is not the only research log.
-The researcher has configured an origin remote; no push is authorized for local baseline work.
+The researcher has configured an origin remote. The initial local baseline work had no push authorization;
+on 2026-10-18 the user explicitly authorized fixing and pushing the project and its operational pin update.
 Next: commit baseline/protocol decisions separately from future results.
 
 ## Initialization handoff in this managed workspace

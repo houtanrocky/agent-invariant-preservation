@@ -1,0 +1,9 @@
+{
+  "command": "docker build -f Dockerfile.review -t dragon-market-review:local .",
+  "started_at": "2026-10-17T22:51:35.775Z",
+  "finished_at": "2026-10-17T22:51:37.924Z",
+  "exit": 0,
+  "status": "PASS",
+  "commit": "f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7",
+  "dirty_worktree": false
+}

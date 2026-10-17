@@ -18,4 +18,7 @@ schema validation cannot establish oracle soundness or genuine execution.
 `validate-task` accepts honest candidate metadata and lists missing gates. `--require-validated` fails
 when evidence is incomplete. Set validated status only after named human review; do not promote on metadata
 alone. Keep reference and oracle files outside the agent filesystem mount/account.
-Next: prioritize T001/T004 only if source inspection confirms a useful new feature; otherwise replace them.
+Two executable drafts are now T001/T002; their prior underspecified/redundant specifications are
+preserved in artifacts/task-spec-history/. References, mutants and held checks remain private, with
+public hash-bound execution summaries. Next: independent human review of baseline, references,
+oracle rationale and information parity before promotion. The other six tasks remain deferred.

@@ -1,10 +1,11 @@
 # Independent evaluation oracles — hidden during collection
 
-No Dragon Market oracles are implemented yet. For each future task, store feature tests, preserved
-invariant regressions, schedules/fault injection and a test-rejected deliberate defect. Document why
-each assertion is justified independently of the reference implementation.
+T001 and T002 have externally held feature and SQL-state assertions, concurrent retries, fault injection
+and feature-passing deliberate defects rejected by invariants. Independent human review is pending.
+Use ignored config/evaluator.local.yaml to locate the private package; keep all held code outside this
+public repository. Public packages record hashes and execution summaries only.
 
 Tests run in an evaluator environment against the captured agent patch after the coding session ends.
 Store assertion-level output; require every invariant ID in the task contract. Repeated scheduling
-is evidence over selected histories, not a proof of serializability. Next: design the first task's
-late-failure and retry counterexamples and review them with a human.
+is evidence over selected histories, not a proof of serializability. Next: independently review expected
+values, fixture validity and coverage gaps before approving oracle-rationale evidence.

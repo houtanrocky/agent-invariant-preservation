@@ -1,0 +1,71 @@
+{
+  "started_at": "2026-10-17T22:51:38.169Z",
+  "commit": "f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7",
+  "dirty_worktree": false,
+  "image": "dragon-market-review:local",
+  "environment": "local Docker / TLS PostgreSQL 16 / real review gateway",
+  "checks": [
+    {
+      "name": "unauthenticated / rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unauthenticated /api/dev/snapshot rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unauthenticated /review/config rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "original seed and dedicated DB visible through gated real snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "deployed identity and pending review truthful",
+      "status": "PASS"
+    },
+    {
+      "name": "item creation through gateway",
+      "status": "PASS"
+    },
+    {
+      "name": "listing creation through gateway",
+      "status": "PASS"
+    },
+    {
+      "name": "purchase and explicit same-key replay",
+      "status": "PASS"
+    },
+    {
+      "name": "independent SQL verifies one debit, credit, owner transfer and idempotency record",
+      "status": "PASS"
+    },
+    {
+      "name": "no hosted test execution endpoint",
+      "status": "PASS"
+    },
+    {
+      "name": "mutation without same-origin rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "hosted Lab explains unavailable runner",
+      "status": "PASS"
+    },
+    {
+      "name": "real browser desktop/mobile and hash refresh without JavaScript errors",
+      "status": "PASS"
+    },
+    {
+      "name": "restart verifies migration ledger and preserves changed balances",
+      "status": "PASS"
+    },
+    {
+      "name": "image nonroot, no test runner or Docker socket",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "finished_at": "2026-10-17T22:51:53.282Z"
+}

@@ -44,12 +44,25 @@ Use `researchctl status` to inspect outstanding validation. The maximum provisio
 This is a feasibility ceiling, not a justified sample size.
 
 Dragon Market is the intended subject: <https://github.com/houtanrocky/dragon-market>.
-The supplied clone is pinned to `162c5cab9fa886445dd102f4a99961027f90aebb`. Source inspection and Go
-build/tests/race/vet checks have run; see [the baseline report](docs/target-baseline.md).
-The suite also reproduces a **pre-existing cross-day spending-limit defect**. Its passing characterization
-test is not a passing invariant. All eight task specifications remain candidates pending human reference
-and oracle validation. `researchctl setup-target` prepares the recorded pin; `python scripts/check_target.py`
-repeats baseline checks with new logs. Do not start agent runs until task and scope gates are satisfied.
+The operational target pin is now `f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7`, integrating the repaired
+wallet into Dragon Market's current deployment code. The user authorized fixing and publishing it.
+The [historical baseline report](docs/target-baseline.md) preserves the old `162c5ca` failure;
+the [integration verification](docs/wallet-integration.md) records the new checks and pin decision.
+Independent human baseline approval remains pending; an operational pin update does not approve a study.
+
+Two executable draft packages now have references, separate feature/state checks and rejected faulty
+variants: [purchase retries](benchmark/packages/T001/README.md) and
+[bid cancellation retries](benchmark/packages/T002/README.md). Each reference passes existing-suite,
+race and vet checks. Both faulty variants pass features but fail state assertions. Private patches,
+oracles and raw logs are held outside this public repository; only hashes and summaries are public.
+Neither task is human-validated. The other six candidates remain deferred.
+
+The [PGS/LISA comparison](literature/pgs-lisa-comparison.md) narrows the proposed contribution.
+`researchctl prepare-snapshot RUN-ID --task T001` exports an explicit, history-free shared inventory;
+real agent filesystem/network containment remains to be demonstrated. `setup-target` prepares the
+integrated repair. The task packages retain their exact `58913f2` starting snapshots and evidence;
+they do not silently inherit results from a different revision. Do not start agent runs until review,
+isolation and protocol gates pass.
 
 ## Repository map
 
@@ -62,7 +75,7 @@ repeats baseline checks with new logs. Do not start agent runs until task and sc
 
 `python scripts/check.py` runs available infrastructure checks. `--strict` also requires Black/Pyflakes;
 CI installs both and runs strict checks on Windows and Linux. LaTeX has a separate CI job.
-Real agent integration, database oracles, statistical inference and manuscript results await research work.
+Real agent integration, independent oracle review, statistical inference and manuscript results remain pending.
 See [licensing decisions](LICENSE-DECISIONS.md) before redistribution. The researcher initialized the
 foundation commit and configured the remote after the initial restricted session. Current Git writes
 are available; no push is performed as part of local baseline verification.

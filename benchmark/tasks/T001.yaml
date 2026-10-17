@@ -1,51 +1,104 @@
 schema_version: '1.0'
 task_id: T001
-title: Idempotent refund behavior
+title: Retry-safe purchase service outcome
 kind: backend_change
-baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
-problem_description: Design a refund change only if the pinned backend lacks equivalent
-  behavior.
+baseline_commit: 58913f27161296bab0d3d223e7452a370cba580d
+problem_description: 'Extend OrderServiceImpl.Buy(ctx, orderID, buyerID) with durable
+  logical retry success: a sold order retried by its recorded, non-null purchaser
+  returns nil, even without an HTTP idempotency key. Use the original purchase identity,
+  not current item ownership, to recognize this outcome. This is a service contract
+  extension; preserve public signatures, schema, existing request-key semantics and
+  all other purchase eligibility rules.'
 expected_behavior:
-- A supported refund returns funds once
-- Retries preserve the original outcome without a duplicate credit
+- First purchase still atomically transfers the price and item and marks the order
+  sold.
+- Sequential or concurrent retries by the original recorded purchaser return nil and
+  do not write state or audit rows.
+- A later transfer of the item does not invalidate the old purchaser retry or transfer
+  the item again.
+- A different buyer, or sold order with no recorded buyer, remains rejected; unsold
+  eligibility rules remain unchanged.
+- Failed persistence rolls back payment, ownership, order and audit effects; a later
+  valid attempt can succeed.
 existing_invariants:
-- id: balance-conservation
-  definition: Committed paired debit/credit effects preserve total gold under the
-    declared no-fee policy.
-  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/order/service.go:93; internal/postgres/research_test.go:59
+- id: purchase-effects-once
+  definition: For one sold order, retries preserve exactly one paired debit/credit
+    and one ownership transfer; all guild gold is conserved.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/order/service.go:Buy;
+    internal/postgres/tx.go; internal/postgres/concurrency_test.go
+- id: purchase-authorization
+  definition: Only the recorded purchaser may receive retry success for a sold order;
+    other buyers cannot acquire it or modify its outcome.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/order/service.go:Buy
+- id: purchase-atomicity
+  definition: A failed purchase leaves balances, reserves, item/order rows and wallet
+    audit rows unchanged.
+  source: 58913f27161296bab0d3d223e7452a370cba580d:internal/postgres/tx.go; internal/order/service.go:Buy
 relevant_repository_areas:
-- internal/api/router.go
-- internal/api/order_handler.go
 - internal/order/service.go
-- internal/guild/service.go
-- internal/idempotency/service.go
-- internal/postgres/research_test.go
+- internal/postgres/order_repo.go
+- internal/postgres/tx.go
 setup_requirements:
-- Clean detached checkout at the exact baseline SHA
-- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
-- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
-  1 through 10
-- Review KNOWN-01 and public research-readiness material before accepting task scope
-evaluation_commands: []
-timeout_seconds: 300
+- Candidate SHA and fresh migration 1–11 database; independent human baseline approval
+  still pending.
+- Go 1.26.0 and Docker Linux containers with PostgreSQL 16; all validation uses disposable
+  Testcontainers databases.
+- Trusted evaluator is held externally; locate it with ignored config/evaluator.local.yaml.
+- Both conditions receive identical REQUEST.md, CONTRACT.md and allowlisted snapshot;
+  do not mount this research checkout.
+evaluation_commands:
+- - go
+  - test
+  - -mod=readonly
+  - -json
+  - -count=1
+  - -timeout=5m
+  - ./internal/postgres
+  - -run
+  - ^TestT001Feature
+- - go
+  - test
+  - -mod=readonly
+  - -json
+  - -count=1
+  - -timeout=5m
+  - ./internal/postgres
+  - -run
+  - ^TestT001Invariant
+timeout_seconds: 600
 hidden_evaluation_requirements:
-- Specify independent feature/invariant assertions; keep outside agent mount
-reference_solution_status: not_started
+- Inject the private task-specific oracle only in a fresh trusted evaluator after
+  coding stops.
+- Inspect SQL rows and audit effects, concurrent retries, authorization and injected
+  persistence rollback.
+- Zero daily limits in held task fixtures deliberately exclude repaired spending-policy
+  behavior from task scoring.
+reference_solution_status: draft
 known_failure_cases:
-- Repeated credit
-- Refund without consistent ownership decision
+- Feature succeeds but retries repeat financial effects.
+- Cross-identity retry accepted.
+- A failed mutation leaves partial durable effects.
 validation_status: candidate
 human_reviewer: null
 evidence:
-  baseline: null
-  reference: null
-  functional: null
-  invariant: null
-  mutant: null
+  baseline:
+    path: benchmark/packages/T001/baseline.json
+    sha256: 5050ed13dad1af569e296b3665722760877a42d9c4c14903e071677f4e572b90
+  reference:
+    path: benchmark/packages/T001/reference.json
+    sha256: b8cbc142d6acb304f207a49c4754db408f32e145f87b2380fd7725aa53e48b54
+  functional:
+    path: benchmark/packages/T001/functional.json
+    sha256: cc63c29e694673703714ab6ce8f6c2209f7cb8f6ec2451414293db4d5840701f
+  invariant:
+    path: benchmark/packages/T001/invariant.json
+    sha256: 70611b0151bdff77e9cd771c3577226ba9b8a7fe84c97a1b1047a4dca0875eaa
+  mutant:
+    path: benchmark/packages/T001/mutant.json
+    sha256: 151f118990459a4db6ae9975dea12e95a9f45f10ef22c95b342f239d3ee4df50
   rationale: null
-availability_assessment: The HTTP router and inspected order/wallet services contain
-  no refund operation. Existing purchase payment and replay are implemented; refund
-  policy remains to define.
-novel_change_assessment: Candidate new refund feature; specify full/partial amounts,
-  authorization assumptions, ownership and original-purchase identity before reference
-  work.
+availability_assessment: Existing HTTP request-key replay is implemented, but direct
+  Buy by the original buyer returns ErrOrderAlreadySold. No equivalent service retry
+  success exists.
+novel_change_assessment: Replaces underspecified refund candidate with a defined service-level
+  retry extension; no refund or daily-limit changes.

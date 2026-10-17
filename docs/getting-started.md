@@ -1,5 +1,10 @@
 # First research day
 
+For the current follow-up, begin with [the review package](review-ready-package.md): a repaired
+candidate and two executable drafts now exist. The [operational pin now includes the integrated repair](wallet-integration.md).
+The checklist below preserves the initial workflow; independent human review and real agent containment
+remain outstanding.
+
 1. Install with README commands, run `researchctl doctor`, `researchctl smoke`, and `python scripts/check.py`.
 2. Read the proposal and questions. Spend a focused session on LISA/PGS full text; update notes and gap.
 3. Run `researchctl setup-target` using the recorded pin. Inspect the source-backed map in

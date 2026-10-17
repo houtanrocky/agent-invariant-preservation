@@ -1,0 +1,15 @@
+{
+  "task_id": "T001",
+  "A": "Implement the feature described in REQUEST.md. Follow the project source and the shared requirements in CONTRACT.md. Use the permitted tools and stay within the recorded execution budget.",
+  "B": "Implement the feature described in REQUEST.md. Follow the project source and the shared requirements in CONTRACT.md. Use the permitted tools and stay within the recorded execution budget.\n\nBefore editing, identify the affected state transitions and map them to requirements in the shared contract. Consider transaction boundaries, retries, concurrent operations and rollback where applicable. After editing, check the affected requirements and explain which tests support them. Do not assume that feature examples establish invariant preservation.",
+  "sha256": {
+    "A": "16cb585c11782385b5d3029224b09b25e44d6f6d3b633b398545d2cd0eaf5e8f",
+    "B": "e65ed2f1e889d46bc82bfed210bf72fe36ea57c304799633c8fa700a04d09156"
+  },
+  "information_parity_review": "pending",
+  "sentence_sources": [
+    "REQUEST.md expected behavior; CONTRACT.md state invariants",
+    "REQUEST.md concurrent/retry/rollback requirements",
+    "CONTRACT.md requirements; methodological reporting instruction only"
+  ]
+}

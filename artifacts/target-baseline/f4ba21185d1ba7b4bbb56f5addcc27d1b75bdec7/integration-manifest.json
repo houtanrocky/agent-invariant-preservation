@@ -1,0 +1,29 @@
+{
+  "integrated_commit": "f4ba21185d1ba7b4bbb56f5addcc27d1b75bdec7",
+  "independent_human_approval": "pending",
+  "artifacts": {
+    "build.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frontend-build.txt": "7642807215f115d6c541e1a345c7fd48bdedb6091aae86926b978bb40b6359bb",
+    "frontend-lint.txt": "9347429cc77878247f81a3c8296b1ced5ef5fa066b2eba59111bfa382ef1586a",
+    "frontend-results.json": "ff53c07a7b9309309389b47ec46559b88cac653bdd515220b0155d335ff7b148",
+    "frontend-test.txt": "a74814e32c085e3c86cb6401a72b88961c466639e0c9429aa653831c7e8e6d11",
+    "frontend-typecheck.txt": "bda67668c38ca85ff354cd268c890e955ed9e83b06275518480eabc48a0e820e",
+    "hosted-smoke.json": "37220190b203f22412a6827c3cb8bb8f9b1925216fe8cf2cb3f867058c83fa7e",
+    "image-build.json": "717c42fce7cb7d316f930d10f3551a18deb08895efdf2ced790947ed4bdc1696",
+    "known_issue.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "known_issue.stdout.txt": "912dd6917872823aaec322cdf4e745823e0848f472dea838526d72c3915c2733",
+    "mutation-capacity-ignores-carried-holds.txt": "49bac1fd7668c9d44b7b9ceb3cb4671a84900e0a6d1d3eab3094061f317187e6",
+    "mutation-release-erases-completed-spending.txt": "95c5dad7a8b91dcbd3f95cf8b6452224e2a8438cca0a65799b1c6b8db2df2a42",
+    "mutation-settlement-omits-completed-debit.txt": "2ab5b2ca93752736924b0b0688af282042cf3d0d828cdd0a4f0b0b9787f74a64",
+    "race.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "race.stdout.txt": "37ebd190b2cc0ba748dc7d3de302a77c9ad8ae6b5d3170a1302169857b0d5546",
+    "report.json": "d35989c852700f7811d64e2af7c6c87bdffeda59202d79833a64eef2af030799",
+    "review-before.txt": "e1f8a84b9e39d497ea9b56bd2f064861d1d6655fdd1bb7e79bac47f775c4c85d",
+    "tests.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests.stdout.txt": "72717611620b7d1d57b4edeb6272c4cb3d51418d5a86bdc770d12393db1f88fa",
+    "vet.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vet.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wallet-mutants.json": "0f2c5ba0e5ff8f48d83294c07b7895e8b4dd8ec487eaf2c31c6287add190443d"
+  }
+}

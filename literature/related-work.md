@@ -9,8 +9,9 @@ for the difficulty of recognizing correct behavior; mutation and metamorphic tes
 oracle checks. A rejected deliberate defect supplies evidence of discrimination, not complete adequacy.
 
 Properties and invariants: PGS uses property-based feedback for LLM refinement; LISA generates invariant
-tests for functional bugs. Their precise overlap with prompt salience during transactional maintenance
-needs full-text review. Do not claim that invariant-guided LLM evaluation is new.
+tests for functional bugs. The [targeted full-text comparison](pgs-lisa-comparison.md) now narrows this
+study to fixed-contract planning guidance during transactional maintenance. Do not claim that
+invariant-guided LLM evaluation is new. Other literature still needs full-text critical review.
 
 Stateful correctness: the isolation critique and Elle motivate histories and anomaly predicates; Chess
 motivates systematic schedule exploration and counterexample reproduction. None alone establishes

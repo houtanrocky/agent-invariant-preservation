@@ -17,6 +17,11 @@ outside the workspace. Use a separate OS account/container/mount exposing only a
 and permitted docs. Keep research/oracle/reference files unreachable, end the agent session, capture patch,
 then evaluate in a separate trusted environment. An agent must not modify its hidden evaluator.
 
+`researchctl prepare-snapshot RUN-ID --task T001` now creates a history-free export with an explicit
+file inventory and hashed shared contract. Use this export for the future containment check; see
+[evaluation isolation](../protocol/evaluation-isolation.md). The exporter does not launch an agent,
+approve the candidate baseline, or enforce host/network isolation.
+
 Integration checklist:
 
 - [ ] Verify actual documented prompt ingestion/noninteractive contract and version command.

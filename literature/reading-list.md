@@ -1,6 +1,7 @@
 # Reading list and paper-reading workflow
 
-All entries have linked metadata checked on 2026-10-17; full-text critical reading is pending. The
+All entries have linked metadata checked on 2026-10-17. PGS v1/v2 and LISA received a targeted full-text
+method/evaluation review on 2026-10-18; see [the comparison](pgs-lisa-comparison.md). Other critical reading is pending. The
 matrix distinguishes publication dates and preprint versions. Missing details remain TO VERIFY.
 No extracted number should enter this study's results.
 
@@ -19,4 +20,4 @@ The requested title “Use Property-Based Testing to Bridge LLM Code Generation 
 and author list. Both are tracked separately. LISA's arXiv page reports ISSRE 2026 acceptance; final
 proceedings metadata remain TO VERIFY. Avoid silently treating preprints as verified published versions.
 
-Next: allocate the first reading session to LISA and PGS, then reassess the gap before task investment.
+Next: independently review the comparison, audit artifacts/appendices, and continue citation searching.
