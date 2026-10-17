@@ -10,6 +10,11 @@ gateway/browser/SQL/restart checks; all three deliberate wallet faults were reje
 operational research pin deliberately, preserving old reports and the prior candidate manifest.
 Task packages retain their exact `58913f2` starts. Independent human approval remains pending.
 
+After publication, a committed-blob check caught Git normalizing CRLF in newly hash-bound evidence
+JSON, which would invalidate checksums in a fresh clone despite passing working-tree checks. Added
+byte-preserving attributes for evidence and manifests, retained original file bytes and hashes, and
+validated the exact staged Git tree through a fresh archive. Existing historical evidence was retained.
+
 An initial setup attempt fetched into the research repository instead of the ignored subject clone;
 the unpublished SHA could not be fetched from origin and the pin remained unchanged. The subsequent
 check honestly recorded another old-pin execution. Corrected the fetch target, then set up and verified

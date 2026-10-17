@@ -26,6 +26,10 @@ persistence. Inspect the [archived report](../artifacts/target-baseline/f4ba2118
 and adjacent integration artifacts for executed outcomes and hashes. Windows/local Docker were
 verified; remote CI and a hosted deployment are separate observations.
 
+Evidence and hash-bound manifests use byte-preserving Git attributes. Their original line endings
+are part of the recorded digest. A fresh export of the staged Git tree passed schema, artifact-hash,
+configuration and documentation checks, covering the checkout boundary as well as the working tree.
+
 Old baseline/candidate reports and the earlier manifest are retained. T001/T002 remain exact,
 separate task snapshots at `58913f2`, now an ancestor of the integrated project. Their references,
 held oracles and mutation evidence remain tied to that starting commit. Do not relabel them as

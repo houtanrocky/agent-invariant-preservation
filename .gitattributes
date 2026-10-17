@@ -2,3 +2,7 @@
 *.png binary
 *.pdf binary
 *.jpg binary
+# Evidence hashes cover exact bytes, including original line endings.
+artifacts/** -text whitespace=cr-at-eol
+benchmark/packages/**/*.json -text whitespace=cr-at-eol
+benchmark/manifests/*.json -text whitespace=cr-at-eol
