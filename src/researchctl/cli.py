@@ -14,7 +14,7 @@ import yaml
 
 from researchctl.analysis import summarize
 from researchctl.demo import smoke
-from researchctl.io import ResearchError, read_yaml, root_at
+from researchctl.io import ResearchError, read_json, read_yaml, root_at
 from researchctl.target import setup, worktree
 from researchctl.validation import load_records, task_check
 
@@ -100,11 +100,35 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
             task_check(root, task)
             if task["validation_status"] == "validated":
                 validated.append(task["task_id"])
+        target = read_yaml(root / "config/target-repository.yaml")
+        report_path = (
+            root
+            / "artifacts/target-baseline"
+            / (target["baseline_commit"] or "unpinned")
+            / "report.json"
+        )
+        baseline = read_json(report_path) if report_path.is_file() else None
+        if baseline and baseline["baseline_commit"] != target["baseline_commit"]:
+            raise ResearchError("Stored baseline report identifies a different commit.")
+        pending_baseline = (
+            []
+            if baseline and baseline["all_commands_passed"]
+            else ["baseline execution/investigation"]
+        )
         return {
             "phase": "foundation; protocol draft",
             "candidate_tasks": len(tasks),
             "validated_tasks": validated,
-            "target": read_yaml(root / "config/target-repository.yaml"),
+            "target": target,
+            "baseline_verification": (
+                None
+                if baseline is None
+                else {
+                    "report": str(report_path.relative_to(root)),
+                    "all_commands_passed": baseline["all_commands_passed"],
+                    "interpretation": baseline["interpretation"],
+                }
+            ),
             "implemented": [
                 "metadata/data validation",
                 "descriptive analysis",
@@ -112,8 +136,9 @@ def execute(args: argparse.Namespace, root: Path) -> Any:
                 "pinned clone/worktree mechanism",
                 "command adapter",
             ],
-            "blocked_or_future": [
-                "baseline execution",
+            "blocked_or_future": pending_baseline
+            + [
+                "pre-existing invariant defects and task eligibility review",
                 "human reference review",
                 "real agent integration",
                 "oracle validation",

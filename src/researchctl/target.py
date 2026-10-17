@@ -54,14 +54,16 @@ def setup(root: Path, pin: str | None = None, discover_pin: bool = False) -> dic
     if git(checkout, "rev-parse", sha + "^{commit}") != sha:
         raise ResearchError("Pin did not resolve to exactly the requested commit.")
     git(checkout, "checkout", "--detach", sha)
+    previous_pin = config["baseline_commit"]
     config["baseline_commit"] = sha
-    config["pin_status"] = "pinned_not_baseline_validated"
-    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
+    if previous_pin != sha:
+        config["pin_status"] = "pinned_not_baseline_validated"
+    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8", newline="\n")
     provenance = {
         "origin_url": config["origin_url"],
         "baseline_commit": sha,
         "checkout": ".local/dragon-market",
-        "baseline_tests": "not_run",
+        "baseline_status": config["pin_status"],
     }
     write_json(root / ".local/target-provenance.json", provenance)
     return provenance

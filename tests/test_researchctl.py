@@ -62,6 +62,9 @@ class ValidationTests(ScratchTest):
         super().setUp()
         self.record = read_json(ROOT / "data/examples/synthetic-runs.json")[0]
         self.task = read_yaml(ROOT / "benchmark/tasks/T001.yaml")
+        self.task["baseline_commit"] = (
+            None  # Explicit unpinned validator fixture, independent of study state.
+        )
 
     def test_candidate_reports_incomplete_gates(self) -> None:
         missing = task_check(ROOT, self.task)
@@ -353,8 +356,17 @@ class ExecutionTests(ScratchTest):
             with redirect_stdout(io.StringIO()) as stream:
                 self.assertEqual(main(["--root", str(ROOT), *command]), 0)
             json.loads(stream.getvalue())
+        unpinned = self.scratch / "unpinned"
+        (unpinned / "config").mkdir(parents=True)
+        (unpinned / "config/study.yaml").write_text("{}", encoding="utf-8")
+        (unpinned / "config/target-repository.yaml").write_text(
+            yaml.safe_dump(
+                {"baseline_commit": None, "origin_url": "https://example.invalid/subject"}
+            ),
+            encoding="utf-8",
+        )
         with redirect_stderr(io.StringIO()) as stream:
-            self.assertEqual(main(["--root", str(ROOT), "setup-target"]), 2)
+            self.assertEqual(main(["--root", str(unpinned), "setup-target"]), 2)
         self.assertIn("unpinned", stream.getvalue())
 
     def test_new_task_is_candidate_and_never_overwrites(self) -> None:
@@ -411,6 +423,10 @@ class TargetTests(ScratchTest):
         result = setup(project, discover_pin=True)
         self.assertEqual(result["baseline_commit"], sha)
         self.assertEqual(setup(project)["baseline_commit"], sha)
+        config = read_yaml(config_path)
+        config["pin_status"] = "software-test-review-status"
+        config_path.write_text(yaml.safe_dump(config), encoding="utf-8")
+        self.assertEqual(setup(project)["baseline_status"], "software-test-review-status")
         checkout = worktree(project, "test-run", sha)
         self.assertEqual(self.run_git(checkout, "rev-parse", "HEAD"), sha)
         self.assertTrue((checkout / "fixture.txt").is_file())
