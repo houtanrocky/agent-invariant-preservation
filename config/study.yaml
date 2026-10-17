@@ -1,0 +1,14 @@
+schema_version: '1.0'
+researcher: Houtan Rocky
+protocol_status: draft
+maximum_tasks: 8
+agent_systems: 2
+conditions:
+- A
+- B
+repetitions: 3
+maximum_main_executions: 96
+randomization_seed: 20261017
+primary_outcome: requested_feature_passes AND all_required_invariants_pass
+sample_size_status: provisional; reassess after pilot; not power-justified
+automatic_retries: 0

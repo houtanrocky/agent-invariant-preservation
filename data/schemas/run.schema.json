@@ -1,0 +1,247 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "data_kind": {
+      "enum": [
+        "observation",
+        "synthetic",
+        "infrastructure"
+      ]
+    },
+    "data_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^(T[0-9]{3}|DEMO-001)$"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "condition": {
+      "enum": [
+        "A",
+        "B"
+      ]
+    },
+    "repetition": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "baseline_commit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "input_tokens": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "output_tokens": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "cost_usd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "tool_interactions": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "build_passes": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "functional_passes": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "invariant_results": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "full_task_success": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "execution_status": {
+      "enum": [
+        "completed",
+        "environment_error",
+        "interrupted",
+        "pending_review"
+      ]
+    },
+    "failure_category": {
+      "enum": [
+        "none",
+        "environment",
+        "feature",
+        "atomicity",
+        "idempotency",
+        "concurrency",
+        "ownership",
+        "balance",
+        "audit",
+        "spending_limit",
+        "build",
+        "timeout",
+        "unclassified"
+      ]
+    },
+    "trace_location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "environment": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "data_kind",
+    "data_label",
+    "run_id",
+    "task_id",
+    "agent_id",
+    "model_id",
+    "model_version",
+    "agent_version",
+    "condition",
+    "repetition",
+    "baseline_commit",
+    "started_at",
+    "ended_at",
+    "duration_seconds",
+    "input_tokens",
+    "output_tokens",
+    "cost_usd",
+    "tool_interactions",
+    "build_passes",
+    "functional_passes",
+    "invariant_results",
+    "full_task_success",
+    "execution_status",
+    "failure_category",
+    "trace_location",
+    "environment",
+    "provenance",
+    "notes"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "data_kind": {
+            "const": "synthetic"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data_label": {
+            "const": "SYNTHETIC SOFTWARE-TEST DATA \u2014 NOT RESEARCH RESULTS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "data_kind": {
+            "const": "infrastructure"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data_label": {
+            "const": "INFRASTRUCTURE SMOKE TEST \u2014 NOT RESEARCH RESULTS"
+          }
+        }
+      }
+    }
+  ]
+}

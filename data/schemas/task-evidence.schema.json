@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "role": {
+      "enum": [
+        "baseline",
+        "reference",
+        "functional",
+        "invariant",
+        "mutant",
+        "rationale"
+      ]
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "executed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expected_exit_code": {
+      "type": "integer"
+    },
+    "actual_exit_code": {
+      "type": "integer"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ]
+      },
+      "minItems": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "task_id",
+    "baseline_commit",
+    "role",
+    "command",
+    "executed_at",
+    "expected_exit_code",
+    "actual_exit_code",
+    "reviewer",
+    "artifacts",
+    "rationale"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "task-evidence"
+}

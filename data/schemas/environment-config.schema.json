@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "python": {
+      "type": "string",
+      "minLength": 1
+    },
+    "go": {
+      "type": "string",
+      "minLength": 1
+    },
+    "os": {
+      "type": "string",
+      "minLength": 1
+    },
+    "architecture": {
+      "type": "string",
+      "minLength": 1
+    },
+    "database_image_digest": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "database_isolation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timezone": {
+      "const": "UTC"
+    },
+    "dependency_lock": {
+      "type": "string",
+      "minLength": 1
+    },
+    "network_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_workspace_isolation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluation_timeout_seconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "concurrency_schedule_seed": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "python",
+    "go",
+    "os",
+    "architecture",
+    "database_image_digest",
+    "database_isolation",
+    "timezone",
+    "dependency_lock",
+    "network_policy",
+    "agent_workspace_isolation",
+    "evaluation_timeout_seconds",
+    "concurrency_schedule_seed"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,35 @@
+schema_version: '1.0'
+task_id: T000
+title: 'TO DEFINE: backend modification'
+kind: backend_change
+baseline_commit: null
+problem_description: TO DEFINE after inspecting pinned source and existing tests.
+expected_behavior:
+- 'TO DEFINE: observable feature behavior with edge cases'
+existing_invariants:
+- id: TO-DEFINE
+  definition: TO DEFINE from baseline evidence
+  source: 'TO VERIFY: pinned source path and line/test'
+relevant_repository_areas: []
+setup_requirements:
+- Pin baseline; execute existing tests first
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- TO DEFINE a deliberate defect
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: Source not inspected; documentation alone cannot validate
+  this task.
+novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
+  not already implemented.

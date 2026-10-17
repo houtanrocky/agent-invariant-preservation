@@ -1,0 +1,45 @@
+{
+  "label": "INFRASTRUCTURE VALIDATION — NOT RESEARCH RESULTS",
+  "recorded_at": "2026-10-17T06:23:54.292706+00:00",
+  "strict_check_command": ".venv/Scripts/python scripts/check.py --strict",
+  "strict_check_exit_code": 0,
+  "tests_discovered": 41,
+  "tests_passed": 40,
+  "tests_skipped": 1,
+  "skip_reason": "Managed Windows sandbox blocks Git MSYS upload-pack subprocess for local clone",
+  "format_and_static_checks": {
+    "black": "25.9.0 passed",
+    "pyflakes": "3.2.0 passed"
+  },
+  "smoke_run_id": "demo-eb97a1e0ae3845c08b35e5d59858f7e5",
+  "smoke_manifest_sha256": "23a7a62144865a25303be2f4af650d89ad02fe9818014004edd7ab251cae5174",
+  "subject_baseline_commit": null,
+  "subject_baseline_tests": "not_run: checkout network and database prerequisites",
+  "latex_compilation": "not_run: pdflatex/BibTeX unavailable",
+  "hosted_ci": "not_run",
+  "source_sha256": {
+    "src/researchctl/adapters.py": "7f8f610ed4534ae9370a7e1c4f117df410d66aa37d37fa0a9dc7440b7310e7eb",
+    "src/researchctl/analysis.py": "df1895e0cae1e5466144642d34ee61351700e7283418c40f47c3d5e6c083f8b3",
+    "src/researchctl/cli.py": "07c3034e91d613ed4c76789027b16f7adaf793823bcf0d2019ceeb53abd04fbc",
+    "src/researchctl/demo.py": "a6d7ce177f44ecd68f4408aede472d186e6ae5c73d4bef4eaf9f3e76d3e93122",
+    "src/researchctl/io.py": "651187e9de3c66dd6220fd65b3ccbdf9f3cf2cae00e5382dc043979bfe833f26",
+    "src/researchctl/target.py": "f020b6dfc9385083bd97cd80a389ee5c044027303240a8bcfdcdc71486db97dd",
+    "src/researchctl/validation.py": "398c50e12380e73c622fda443516f267d4801c422b05885c27be33eb808847da",
+    "src/researchctl/__init__.py": "4127e2d3ab141c646307619ecb7f008830e5c67cff20f4c6f3bb36e11a9c8c84",
+    "src/researchctl/__main__.py": "cde57386a19c2ef050f41bfacfccf7a890760a7ca16761554d9a836e3c69610f",
+    "tests/test_researchctl.py": "4079bd33f27c086dfb75f211699ee9338f41df25aceb557e4cfc415acc5a0555",
+    "analysis/descriptive.py": "917deb0531836ca82664923a769095a604a128a22bc97934567d69c561f9a86d",
+    "analysis/statistical_analysis.py": "18e79c2b6bde1a159869520d0641c4d5d1d46e32055ccbb3f7149b7c4448f22c",
+    "analysis/visualizations.py": "fc8345db731d8d02d70fea1d8a34b78264406d581dfde221cce2c6c0d18cab90",
+    "scripts/build_editable.py": "3446d56b7dc1f1e1fbb361be96a6d46d2b075299f62236f4fa4f54d20d26a1c4",
+    "scripts/build_paper.py": "8b656958d98586725c9d40fe3d1fab044413456382355b8f1348f1c1aa136359",
+    "scripts/check.py": "ff67dcb9fb2d7bb5b55561470e1246607153291a72a327afcd0b76bfcd46b1f1"
+  },
+  "git_handoff": {
+    "branch": "main",
+    "project_commits": 0,
+    "status": "145 untracked foundation files; no project HEAD",
+    "blocked_action": "git add / git commit: .git/index.lock permission denied",
+    "remote_configured": false
+  }
+}

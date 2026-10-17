@@ -1,0 +1,150 @@
+[
+  {
+    "schema_version": "1.0",
+    "data_kind": "synthetic",
+    "data_label": "SYNTHETIC SOFTWARE-TEST DATA — NOT RESEARCH RESULTS",
+    "run_id": "synthetic-1",
+    "task_id": "T001",
+    "agent_id": "fake-system",
+    "model_id": "fake-model",
+    "model_version": "synthetic",
+    "agent_version": "synthetic",
+    "condition": "A",
+    "repetition": 1,
+    "baseline_commit": null,
+    "started_at": "2026-01-01T00:00:00Z",
+    "ended_at": "2026-01-01T00:00:02Z",
+    "duration_seconds": 2,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "tool_interactions": null,
+    "build_passes": true,
+    "functional_passes": true,
+    "invariant_results": {
+      "refund-once": false
+    },
+    "full_task_success": false,
+    "execution_status": "completed",
+    "failure_category": "idempotency",
+    "trace_location": "not-applicable-synthetic",
+    "environment": {
+      "fixture": "synthetic"
+    },
+    "provenance": {
+      "source": "hand-authored software-test fixture"
+    },
+    "notes": "Never use as research evidence."
+  },
+  {
+    "schema_version": "1.0",
+    "data_kind": "synthetic",
+    "data_label": "SYNTHETIC SOFTWARE-TEST DATA — NOT RESEARCH RESULTS",
+    "run_id": "synthetic-2",
+    "task_id": "T001",
+    "agent_id": "fake-system",
+    "model_id": "fake-model",
+    "model_version": "synthetic",
+    "agent_version": "synthetic",
+    "condition": "A",
+    "repetition": 2,
+    "baseline_commit": null,
+    "started_at": "2026-01-01T00:00:00Z",
+    "ended_at": "2026-01-01T00:00:03Z",
+    "duration_seconds": 3,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "tool_interactions": null,
+    "build_passes": true,
+    "functional_passes": true,
+    "invariant_results": {
+      "refund-once": true
+    },
+    "full_task_success": true,
+    "execution_status": "completed",
+    "failure_category": "none",
+    "trace_location": "not-applicable-synthetic",
+    "environment": {
+      "fixture": "synthetic"
+    },
+    "provenance": {
+      "source": "hand-authored software-test fixture"
+    },
+    "notes": "Never use as research evidence."
+  },
+  {
+    "schema_version": "1.0",
+    "data_kind": "synthetic",
+    "data_label": "SYNTHETIC SOFTWARE-TEST DATA — NOT RESEARCH RESULTS",
+    "run_id": "synthetic-3",
+    "task_id": "T001",
+    "agent_id": "fake-system",
+    "model_id": "fake-model",
+    "model_version": "synthetic",
+    "agent_version": "synthetic",
+    "condition": "B",
+    "repetition": 1,
+    "baseline_commit": null,
+    "started_at": "2026-01-01T00:00:00Z",
+    "ended_at": "2026-01-01T00:00:04Z",
+    "duration_seconds": 4,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "tool_interactions": null,
+    "build_passes": true,
+    "functional_passes": true,
+    "invariant_results": {
+      "refund-once": true
+    },
+    "full_task_success": true,
+    "execution_status": "completed",
+    "failure_category": "none",
+    "trace_location": "not-applicable-synthetic",
+    "environment": {
+      "fixture": "synthetic"
+    },
+    "provenance": {
+      "source": "hand-authored software-test fixture"
+    },
+    "notes": "Never use as research evidence."
+  },
+  {
+    "schema_version": "1.0",
+    "data_kind": "synthetic",
+    "data_label": "SYNTHETIC SOFTWARE-TEST DATA — NOT RESEARCH RESULTS",
+    "run_id": "synthetic-4",
+    "task_id": "T001",
+    "agent_id": "fake-system",
+    "model_id": "fake-model",
+    "model_version": "synthetic",
+    "agent_version": "synthetic",
+    "condition": "B",
+    "repetition": 2,
+    "baseline_commit": null,
+    "started_at": "2026-01-01T00:00:00Z",
+    "ended_at": "2026-01-01T00:00:05Z",
+    "duration_seconds": 5,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "tool_interactions": null,
+    "build_passes": true,
+    "functional_passes": true,
+    "invariant_results": {
+      "refund-once": true
+    },
+    "full_task_success": true,
+    "execution_status": "completed",
+    "failure_category": "none",
+    "trace_location": "not-applicable-synthetic",
+    "environment": {
+      "fixture": "synthetic"
+    },
+    "provenance": {
+      "source": "hand-authored software-test fixture"
+    },
+    "notes": "Never use as research evidence."
+  }
+]

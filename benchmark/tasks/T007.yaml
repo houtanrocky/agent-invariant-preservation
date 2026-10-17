@@ -1,0 +1,38 @@
+schema_version: '1.0'
+task_id: T007
+title: Spending-limit enforcement
+kind: backend_change
+baseline_commit: null
+problem_description: Assess a spending-policy extension and its UTC-boundary and concurrency
+  behavior.
+expected_behavior:
+- Concurrent eligible spending obeys the specified limit and day boundary
+existing_invariants:
+- id: spending-bound
+  definition: Committed spending never exceeds the effective policy limit.
+  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
+relevant_repository_areas: []
+setup_requirements:
+- Pin baseline; execute existing tests first
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- Check-then-act race
+- Incorrect UTC reset
+- Retry counted twice
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: Daily limits and UTC resets already appear in README; new
+  policy semantics must be justified.
+novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
+  not already implemented.

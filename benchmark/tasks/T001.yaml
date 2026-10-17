@@ -1,0 +1,38 @@
+schema_version: '1.0'
+task_id: T001
+title: Idempotent refund behavior
+kind: backend_change
+baseline_commit: null
+problem_description: Design a refund change only if the pinned backend lacks equivalent
+  behavior.
+expected_behavior:
+- A supported refund returns funds once
+- Retries preserve the original outcome without a duplicate credit
+existing_invariants:
+- id: refund-once
+  definition: Refund effects occur at most once for the same operation identity.
+  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
+relevant_repository_areas: []
+setup_requirements:
+- Pin baseline; execute existing tests first
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- Repeated credit
+- Refund without consistent ownership decision
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: README documents idempotent financial mutations, but no refund
+  route is listed. Absence in code is unverified.
+novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
+  not already implemented.

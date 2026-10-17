@@ -1,0 +1,49 @@
+\section{Research Questions}
+\begin{description}
+\item[RQ1] How often do coding agents implement requested backend changes while preserving required invariants?
+\item[RQ2] Does explicit invariant-oriented guidance improve joint correctness relative to standard instructions?
+\item[RQ3] Which categories of invariant violation occur most frequently?
+\item[RQ4, exploratory] How do execution time, tokens and tool interactions relate to correctness?
+\end{description}
+The preliminary hypothesis predicts improved correctness with invariant-oriented guidance. It is
+untested. The primary planned estimand is the difference in success probability between conditions,
+equally weighted across validated tasks and selected systems.
+
+\section{Methodology}
+The draft design crosses up to eight validated backend modification tasks, two agent systems, two
+prompt conditions and three independent executions per cell. The ceiling of 96 main executions is
+provisional and is not a statistically justified sample size. A separate pilot will reassess task count,
+repetitions, feasibility, power and detectable effects before main collection.
+
+Both conditions receive identical feature requests, pinned source, documentation access and underlying
+requirements. Condition B adds structured attention to affected state transitions, transaction
+boundaries, retries and verification. Prompt length and planning attention are part of this bundled
+intervention. Independent sessions and clean environments will prevent cross-condition carryover.
+
+Each accepted task will require a reproducible baseline, clear new behavior, a human-reviewed reference,
+automated feature and invariant checks, and a relevant deliberately defective implementation rejected
+by the tests. Hidden evaluations remain outside the agent's accessible filesystem. The primary outcome is
+\[
+\texttt{full\_task\_success} =
+\texttt{feature\_passes} \land \texttt{all\_required\_invariants\_pass}.
+\]
+Individual outcomes and histories will be retained. Environment failures are investigated separately
+and do not silently become ordinary correctness failures. Missing measurements remain missing.
+
+Analyses will describe task/system/condition rates and matched condition differences. Repeated runs
+are nested within tasks; marginal intervals cannot establish cluster-aware uncertainty. Mixed-effects
+logistic regression will be considered only if supported by adequate variation and identifiable data.
+Sparse data may justify descriptive conclusions alone. Resource associations remain exploratory.
+
+\section{Experimental Setup}
+The intended subject is Dragon Market\footnote{\url{https://github.com/houtanrocky/dragon-market}}.
+At infrastructure initialization only its public documentation was accessible; exact source SHA,
+implementation, dependencies and baseline outcomes remain unverified. Candidate tasks cover refunds,
+settlement, purchases, transfers, reservations, rollback, limits and audit consistency. None is currently
+validated. Some proposed safety behavior is already described in the README and therefore requires a
+meaningful feature extension before task selection.
+
+\textbf{Setup fields to complete after pilot:} exact subject/research commits, accepted task inventory,
+agent and model versions, prompt hashes, budgets/retries, tool permissions, OS/Go/dependency versions,
+PostgreSQL image digest and isolation configuration, seed/reset/schedule policy, baseline failures,
+and evaluator commands. This manuscript does not imply that integrations or database tests have run.

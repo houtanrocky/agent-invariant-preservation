@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "researcher": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_status": {
+      "enum": [
+        "draft",
+        "frozen"
+      ]
+    },
+    "maximum_tasks": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "agent_systems": {
+      "const": 2
+    },
+    "conditions": {
+      "const": [
+        "A",
+        "B"
+      ]
+    },
+    "repetitions": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maximum_main_executions": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 96
+    },
+    "randomization_seed": {
+      "type": "integer"
+    },
+    "primary_outcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample_size_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "automatic_retries": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "researcher",
+    "protocol_status",
+    "maximum_tasks",
+    "agent_systems",
+    "conditions",
+    "repetitions",
+    "maximum_main_executions",
+    "randomization_seed",
+    "primary_outcome",
+    "sample_size_status",
+    "automatic_retries"
+  ],
+  "additionalProperties": false
+}

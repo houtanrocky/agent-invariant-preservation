@@ -1,0 +1,39 @@
+schema_version: '1.0'
+task_id: T004
+title: Wallet transfer correctness
+kind: backend_change
+baseline_commit: null
+problem_description: Assess adding a direct wallet transfer, including retry semantics
+  and lock ordering.
+expected_behavior:
+- Valid transfers debit and credit atomically
+- Invalid transfers do not change either wallet
+existing_invariants:
+- id: balance-conservation
+  definition: Total gold is preserved across a transfer absent explicitly specified
+    fees.
+  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
+relevant_repository_areas: []
+setup_requirements:
+- Pin baseline; execute existing tests first
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- Debit without credit
+- Negative amount or deadlock from opposite transfers
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: README describes wallet reservations but lists no direct
+  transfer route. Code availability is unverified.
+novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
+  not already implemented.

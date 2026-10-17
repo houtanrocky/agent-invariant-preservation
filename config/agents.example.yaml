@@ -1,0 +1,27 @@
+# Copy to agents.local.yaml (ignored). No actual CLI integration has been verified.
+schema_version: '1.0'
+agents:
+  - id: system-1
+    adapter: command_stdin
+    command: [TO_CONFIGURE_EXECUTABLE]
+    model_id: TO_VERIFY
+    model_version: TO_VERIFY
+    agent_version: TO_VERIFY
+    timeout_seconds: 1800
+    token_budget: null
+    cost_budget_usd: null
+    budget_enforcement: external_wrapper_required
+    environment_variable_names: [RESEARCH_AGENT_TOKEN]
+    integration_status: unverified
+  - id: system-2
+    adapter: command_stdin
+    command: [TO_CONFIGURE_EXECUTABLE]
+    model_id: TO_VERIFY
+    model_version: TO_VERIFY
+    agent_version: TO_VERIFY
+    timeout_seconds: 1800
+    token_budget: null
+    cost_budget_usd: null
+    budget_enforcement: external_wrapper_required
+    environment_variable_names: [RESEARCH_AGENT_TOKEN]
+    integration_status: unverified

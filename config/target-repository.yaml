@@ -1,0 +1,8 @@
+origin_url: https://github.com/houtanrocky/dragon-market
+baseline_commit: null
+pin_status: blocked_network; exact source commit not yet retrieved
+documentation_observed_on: '2026-10-17'
+documentation_source: https://github.com/houtanrocky/dragon-market
+checkout_directory: .local/dragon-market
+go_requirement: TO VERIFY from pinned go.mod; README says 1.25+
+database: TO VERIFY from pinned configuration; README says PostgreSQL 16

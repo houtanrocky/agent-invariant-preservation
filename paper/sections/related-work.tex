@@ -1,0 +1,18 @@
+\section{Related Work}
+SWE-bench and SWE-agent provide context for repository tasks and agent execution
+\cite{swe-bench,swe-agent}. SWE-Bench+ raises questions about solution leakage and weak tests
+\cite{swe-bench-plus}. These concerns motivate independent oracle validation and review of apparent
+successes, rather than assuming that a passing score establishes semantic correctness.
+
+QuickCheck presents randomized property checking \cite{quickcheck}. Property-Generated Solver
+investigates property-based feedback for LLM code generation and refinement
+\cite{property-generated-solver-v1,property-generated-solver-v2}; LISA studies LLM-based invariant
+testing for functional bugs \cite{lisa}. Their overlap with the present intervention must be examined
+in full before making a novelty claim. Version-specific metadata are retained for the two PGS papers.
+
+The test-oracle, metamorphic-testing, mutation-testing and regression-testing literature provides
+methodological context \cite{test-oracles,metamorphic-testing,mutation-testing,regression-testing}.
+Isolation definitions, history-based anomaly detection and systematic concurrency testing motivate
+careful state and interleaving checks \cite{sql-isolation,elle,chess}.
+\textbf{Writing task:} replace this preliminary source screening with a critical full-text synthesis,
+including setting differences, methodological limitations and source locations.

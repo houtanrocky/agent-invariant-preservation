@@ -1,0 +1,13 @@
+schema_version: '1.0'
+python: '3.11+'
+go: TO_VERIFY_FROM_PINNED_GO_MOD
+os: TO_RECORD
+architecture: TO_RECORD
+database_image_digest: null
+database_isolation: TO_VERIFY
+timezone: UTC
+dependency_lock: go.sum at pinned target commit
+network_policy: document allowed endpoints per agent
+agent_workspace_isolation: separate OS account or container required for hidden-test protection
+evaluation_timeout_seconds: 300
+concurrency_schedule_seed: null

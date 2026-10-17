@@ -1,0 +1,38 @@
+schema_version: '1.0'
+task_id: T006
+title: Failed transaction rollback
+kind: backend_change
+baseline_commit: null
+problem_description: Add a supported feature with a late failure path and require
+  atomic rollback.
+expected_behavior:
+- Injected failures leave balances, ownership and audit effects in the specified pre-operation
+  state
+existing_invariants:
+- id: atomic-effects
+  definition: No partial committed business effects remain after a failed operation.
+  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
+relevant_repository_areas: []
+setup_requirements:
+- Pin baseline; execute existing tests first
+evaluation_commands: []
+timeout_seconds: 300
+hidden_evaluation_requirements:
+- Specify independent feature/invariant assertions; keep outside agent mount
+reference_solution_status: not_started
+known_failure_cases:
+- Balance written before failed ownership update
+- Audit record for rolled-back operation
+validation_status: candidate
+human_reviewer: null
+evidence:
+  baseline: null
+  reference: null
+  functional: null
+  invariant: null
+  mutant: null
+  rationale: null
+availability_assessment: README claims rollback integration coverage. A concrete new
+  feature/failure point needs source inspection.
+novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
+  not already implemented.
