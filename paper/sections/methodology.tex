@@ -37,13 +37,21 @@ Sparse data may justify descriptive conclusions alone. Resource associations rem
 
 \section{Experimental Setup}
 The intended subject is Dragon Market\footnote{\url{https://github.com/houtanrocky/dragon-market}}.
-At infrastructure initialization only its public documentation was accessible; exact source SHA,
-implementation, dependencies and baseline outcomes remain unverified. Candidate tasks cover refunds,
-settlement, purchases, transfers, reservations, rollback, limits and audit consistency. None is currently
-validated. Some proposed safety behavior is already described in the README and therefore requires a
-meaningful feature extension before task selection.
+The inspected candidate baseline is commit
+\texttt{162c5cab9fa886445dd102f4a99961027f90aebb}. Its Go build, test, race-enabled test and vet
+commands passed using Go 1.26.0 on Windows with isolated Testcontainers PostgreSQL. A targeted
+characterization test also reproduced a pre-existing daily-spending defect involving release of a
+prior-day reservation. Its passing outcome does not establish preservation of the intended daily bound;
+that requirement needs an explicit scope or reviewed baseline decision before main collection.
+These are setup checks, not coding-agent observations.
+
+Candidate tasks cover refunds, settlement, purchases, transfers, reservations, rollback, limits and
+audit consistency. None is currently validated. Inspection found existing settlement, purchase-safety,
+cancellation, rollback and audit implementations, so those candidates need meaningful feature extensions.
+The baseline also contains public research-readiness material and a workbench; the exact content exposed
+to agents must be frozen identically across conditions and separated from new hidden study oracles.
 
 \textbf{Setup fields to complete after pilot:} exact subject/research commits, accepted task inventory,
 agent and model versions, prompt hashes, budgets/retries, tool permissions, OS/Go/dependency versions,
 PostgreSQL image digest and isolation configuration, seed/reset/schedule policy, baseline failures,
-and evaluator commands. This manuscript does not imply that integrations or database tests have run.
+and evaluator commands. No coding-agent integration, validated benchmark or empirical outcome is implied.

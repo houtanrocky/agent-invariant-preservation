@@ -1,7 +1,9 @@
 # Artifact preservation
 
-manifest.csv inventories local ignored infrastructure-validation artifacts; it has no empirical rows.
-validation-summary.json records the actual acceptance checks and source hashes. For each retained artifact record
+manifest.csv inventories local infrastructure-validation artifacts and committed subject-baseline evidence;
+it has no coding-agent observation rows. validation-summary.json preserves the initial acceptance checks
+and source hashes as a historical record. target-baseline/ stores the inspected subject's checks and
+nonempty raw outputs; empty streams retain hashes in the baseline report. For each retained artifact record
 ID, run ID, kind, immutable relative path or storage URI, SHA-256, byte count, capture time, access level
 and notes. Prefer repository-relative paths for small non-sensitive evidence; large logs may use Git LFS
 or researcher-controlled immutable storage. A URI alone is not integrity evidence.

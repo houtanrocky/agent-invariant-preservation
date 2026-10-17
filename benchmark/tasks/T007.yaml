@@ -2,18 +2,27 @@ schema_version: '1.0'
 task_id: T007
 title: Spending-limit enforcement
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Assess a spending-policy extension and its UTC-boundary and concurrency
   behavior.
 expected_behavior:
 - Concurrent eligible spending obeys the specified limit and day boundary
 existing_invariants:
-- id: spending-bound
-  definition: Committed spending never exceeds the effective policy limit.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+- id: wallet-reservation-bounds
+  definition: Persisted gold is nonnegative and reserved is between zero and gold.
+    The intended cross-day spending bound is violated and is not claimed here.
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:migrations/up/000010_add_wallet_audit_and_daily_date.up.sql:1
+relevant_repository_areas:
+- internal/guild/service.go
+- internal/postgres/known_issue_test.go
+- docs/research-readiness/known-issues.md
+- migrations/up/000010_add_wallet_audit_and_daily_date.up.sql
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -23,6 +32,8 @@ known_failure_cases:
 - Check-then-act race
 - Incorrect UTC reset
 - Retry counted twice
+- 'Pre-existing KNOWN-01: prior-day reservation release reduces today''s recorded
+  spending'
 validation_status: candidate
 human_reviewer: null
 evidence:
@@ -32,7 +43,9 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: Daily limits and UTC resets already appear in README; new
-  policy semantics must be justified.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: 'Daily spending checks and UTC reset exist, but KNOWN-01
+  is reproduced: releasing yesterday''s reservation can permit 800 spent today under
+  a limit of 500. Its passing test characterizes the defect.'
+novel_change_assessment: BLOCKED for preservation scoring of the cross-day spending
+  bound. Exclude it, adopt a separately reviewed fixed baseline, or explicitly design
+  a distinct repair study before freeze.

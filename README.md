@@ -44,11 +44,12 @@ Use `researchctl status` to inspect outstanding validation. The maximum provisio
 This is a feasibility ceiling, not a justified sample size.
 
 Dragon Market is the intended subject: <https://github.com/houtanrocky/dragon-market>.
-Terminal cloning was blocked by this environment's network proxy. Only its public README was accessible;
-source-level implementation claims, commit SHA and baseline tests remain **TO VERIFY**.
-When networking works, run `researchctl setup-target --discover-pin` once; commit the resulting exact SHA
-after baseline verification. Subsequent `researchctl setup-target` uses that pin, never a floating branch.
-Do not start agent runs until tasks and oracles pass the validation gates.
+The supplied clone is pinned to `162c5cab9fa886445dd102f4a99961027f90aebb`. Source inspection and Go
+build/tests/race/vet checks have run; see [the baseline report](docs/target-baseline.md).
+The suite also reproduces a **pre-existing cross-day spending-limit defect**. Its passing characterization
+test is not a passing invariant. All eight task specifications remain candidates pending human reference
+and oracle validation. `researchctl setup-target` prepares the recorded pin; `python scripts/check_target.py`
+repeats baseline checks with new logs. Do not start agent runs until task and scope gates are satisfied.
 
 ## Repository map
 
@@ -62,6 +63,6 @@ Do not start agent runs until tasks and oracles pass the validation gates.
 `python scripts/check.py` runs available infrastructure checks. `--strict` also requires Black/Pyflakes;
 CI installs both and runs strict checks on Windows and Linux. LaTeX has a separate CI job.
 Real agent integration, database oracles, statistical inference and manuscript results await research work.
-See [licensing decisions](LICENSE-DECISIONS.md) before redistribution. No remote has been configured.
-Git is initialized on `main`, but this managed session denied `.git/index.lock` writes, so the files
-remain uncommitted. Follow [the Git handoff](docs/git-workflow.md) in a metadata-writable environment.
+See [licensing decisions](LICENSE-DECISIONS.md) before redistribution. The researcher initialized the
+foundation commit and configured the remote after the initial restricted session. Current Git writes
+are available; no push is performed as part of local baseline verification.

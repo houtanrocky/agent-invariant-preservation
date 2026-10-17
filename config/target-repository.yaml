@@ -1,8 +1,9 @@
 origin_url: https://github.com/houtanrocky/dragon-market
-baseline_commit: null
-pin_status: blocked_network; exact source commit not yet retrieved
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
+pin_status: pinned_checks_passed_known_invariant_violation; human review pending
 documentation_observed_on: '2026-10-17'
-documentation_source: https://github.com/houtanrocky/dragon-market
+documentation_source: https://github.com/houtanrocky/dragon-market/tree/162c5cab9fa886445dd102f4a99961027f90aebb
 checkout_directory: .local/dragon-market
-go_requirement: TO VERIFY from pinned go.mod; README says 1.25+
-database: TO VERIFY from pinned configuration; README says PostgreSQL 16
+go_requirement: go.mod specifies Go 1.25.0; baseline checks executed with Go 1.26.0
+  windows/amd64
+database: PostgreSQL postgres:16-alpine; Testcontainers; observed image postgres@sha256:e013e867e712fec275706a6c51c966f0bb0c93cfa8f51000f85a15f9865a28cb

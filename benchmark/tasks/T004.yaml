@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T004
 title: Wallet transfer correctness
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Assess adding a direct wallet transfer, including retry semantics
   and lock ordering.
 expected_behavior:
@@ -12,10 +12,20 @@ existing_invariants:
 - id: balance-conservation
   definition: Total gold is preserved across a transfer absent explicitly specified
     fees.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/order/service.go:93 implements
+    existing coupled debit/credit; internal/guild/service.go:74,169,189
+relevant_repository_areas:
+- internal/guild/service.go
+- internal/guild/repository.go
+- internal/api/router.go
+- internal/postgres/guild_repo.go
+- internal/postgres/tx.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -33,7 +43,8 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README describes wallet reservations but lists no direct
-  transfer route. Code availability is unverified.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: Wallet service implements Reserve, Release, Deduct, Earn
+  and Spend. No direct guild-to-guild transfer method or route was found in the inspected
+  contracts/router.
+novel_change_assessment: Candidate new transfer feature; specify recipient, retry
+  identity, opposing-transfer lock order and spending policy before reference work.

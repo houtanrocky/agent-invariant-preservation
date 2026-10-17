@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T003
 title: Concurrent purchase safety
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Choose a new purchase capability that must retain existing purchase
   safety.
 expected_behavior:
@@ -10,10 +10,19 @@ expected_behavior:
 existing_invariants:
 - id: single-owner
   definition: One item has one owner and one successful completed purchase for a listing.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/order/service.go:93; internal/postgres/concurrency_test.go:16;
+    internal/postgres/research_test.go:86,168
+relevant_repository_areas:
+- internal/order/service.go
+- internal/postgres/order_repo.go
+- internal/postgres/concurrency_test.go
+- internal/postgres/research_test.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -31,7 +40,8 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README already claims transaction locks and competing-purchase
-  tests; inspect before selecting an extension.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: OrderServiceImpl.Buy locks item and order and performs wallet/ownership
+  effects in one transaction. Competing-buyer and identical-key concurrency tests
+  exist.
+novel_change_assessment: Concurrent purchase safety alone is existing behavior. Define
+  an extension that must preserve it; do not reimplement the baseline as a task.

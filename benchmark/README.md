@@ -2,7 +2,10 @@
 
 Eight YAML candidate specifications cover the requested domains. **Zero tasks are validated**.
 Some requested safety behavior is already claimed by the subject README, so each candidate needs a
-meaningful extension after source inspection. No repository APIs, function names or defects are asserted.
+meaningful extension. Source inspection now verifies the relevant implementations and records a
+pre-existing daily-limit defect. See [the inspection](../research/subject-inspection.md) and
+[baseline report](../docs/target-baseline.md). Task metadata is pinned and source-backed; references and
+independent oracles remain unvalidated.
 
 Use `researchctl list-tasks`, `researchctl new-task T009 --title "A concrete change"`, then
 `researchctl validate-task benchmark/tasks/T009.yaml`. Ordinary validation checks candidate metadata
@@ -15,4 +18,5 @@ self-contained infrastructure check and is ineligible as a backend benchmark tas
 
 No agent receives this research repository. Expose only a clean subject workspace and approved shared
 documentation. Worktrees alone do not enforce filesystem isolation. See docs/agent-execution.md.
-Next: pin and inspect the subject; validate two selected feature changes using protocol/task-construction.md.
+Next: decide task eligibility and exposure policy, then validate two selected feature changes using
+protocol/task-construction.md. A green baseline suite does not override the known invariant violation.

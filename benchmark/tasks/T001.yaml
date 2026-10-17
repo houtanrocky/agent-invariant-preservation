@@ -2,19 +2,30 @@ schema_version: '1.0'
 task_id: T001
 title: Idempotent refund behavior
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Design a refund change only if the pinned backend lacks equivalent
   behavior.
 expected_behavior:
 - A supported refund returns funds once
 - Retries preserve the original outcome without a duplicate credit
 existing_invariants:
-- id: refund-once
-  definition: Refund effects occur at most once for the same operation identity.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+- id: balance-conservation
+  definition: Committed paired debit/credit effects preserve total gold under the
+    declared no-fee policy.
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/order/service.go:93; internal/postgres/research_test.go:59
+relevant_repository_areas:
+- internal/api/router.go
+- internal/api/order_handler.go
+- internal/order/service.go
+- internal/guild/service.go
+- internal/idempotency/service.go
+- internal/postgres/research_test.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -32,7 +43,9 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README documents idempotent financial mutations, but no refund
-  route is listed. Absence in code is unverified.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: The HTTP router and inspected order/wallet services contain
+  no refund operation. Existing purchase payment and replay are implemented; refund
+  policy remains to define.
+novel_change_assessment: Candidate new refund feature; specify full/partial amounts,
+  authorization assumptions, ownership and original-purchase identity before reference
+  work.

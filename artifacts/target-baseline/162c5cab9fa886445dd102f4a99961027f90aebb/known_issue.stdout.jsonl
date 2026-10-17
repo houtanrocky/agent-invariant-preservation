@@ -1,0 +1,9 @@
+{"Time":"2026-10-17T11:07:36.5491435+03:30","Action":"start","Package":"market-dragon/internal/postgres"}
+{"Time":"2026-10-17T11:07:42.1585693+03:30","Action":"run","Package":"market-dragon/internal/postgres","Test":"TestKnownIssuePriorDayReleaseReducesTodaySpending"}
+{"Time":"2026-10-17T11:07:42.1585693+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestKnownIssuePriorDayReleaseReducesTodaySpending","Output":"=== RUN   TestKnownIssuePriorDayReleaseReducesTodaySpending\n"}
+{"Time":"2026-10-17T11:07:42.4682471+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestKnownIssuePriorDayReleaseReducesTodaySpending","Output":"    known_issue_test.go:33: KNOWN-01 CONFIRMED: 800 spent today under limit 500 after release of yesterday's reservation. This test does not verify limit safety.\n"}
+{"Time":"2026-10-17T11:07:42.4688023+03:30","Action":"output","Package":"market-dragon/internal/postgres","Test":"TestKnownIssuePriorDayReleaseReducesTodaySpending","Output":"--- PASS: TestKnownIssuePriorDayReleaseReducesTodaySpending (0.31s)\n"}
+{"Time":"2026-10-17T11:07:42.4688023+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Test":"TestKnownIssuePriorDayReleaseReducesTodaySpending","Elapsed":0.31}
+{"Time":"2026-10-17T11:07:42.4688023+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"PASS\n"}
+{"Time":"2026-10-17T11:07:43.2660815+03:30","Action":"output","Package":"market-dragon/internal/postgres","Output":"ok  \tmarket-dragon/internal/postgres\t6.716s\n"}
+{"Time":"2026-10-17T11:07:43.2660815+03:30","Action":"pass","Package":"market-dragon/internal/postgres","Elapsed":6.717}

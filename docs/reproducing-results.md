@@ -13,5 +13,7 @@ resolved environment, database fixtures, agent/model versions, prompt hashes, or
 and evaluator histories. Regenerate descriptive.py/statistical_analysis.py outputs from observations;
 record input/output hashes and code/environment. Hosted models may drift or cease to be available;
 re-evaluation of preserved patches should remain possible even if regeneration is not.
-Next: add exact task-specific reproduction commands as tasks become validated, without pretending
+Baseline subject verification is now documented in target-baseline.md and executable with
+`python scripts/check_target.py`; its command results and KNOWN-01 reproduction are setup evidence,
+not coding-agent study outcomes. Next: add exact task-specific commands as tasks become validated, without pretending
 that current schema checks reproduce a transactional experiment.

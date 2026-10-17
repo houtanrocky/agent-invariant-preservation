@@ -12,25 +12,21 @@ the research repository commit. Do not amend/rewrite a published research histor
 Use `git status --short`, `git diff --check` and `python scripts/check.py --strict` before committing.
 Do not commit ignored credentials, downloaded source, databases or large private traces. Raw non-sensitive
 records and provenance belong in Git or checksummed artifact storage. Git is not the only research log.
-No remote or push is authorized. Next: commit baseline/protocol decisions separately from future results.
+The researcher has configured an origin remote; no push is authorized for local baseline work.
+Next: commit baseline/protocol decisions separately from future results.
 
 ## Initialization handoff in this managed workspace
 
-Git initialized main, but `.git/index.lock` creation was denied by the read-only metadata policy.
-The initial files are untracked and no project commits exist. From a terminal/environment with metadata
-write access, review `git status --short` and create the intended logical commits:
+The initial restricted session could initialize main but could not create `.git/index.lock`.
+The researcher subsequently created `3a5a1c2` (`Initialize`) and configured origin. That foundation
+history is retained. Git metadata writes are now available. Use focused follow-up commits:
 
 ```text
-git add .gitignore .gitattributes .env.example README.md ROADMAP.md CHANGELOG.md CONTRIBUTING.md LICENSE-DECISIONS.md research literature protocol progress presentation docs
-git commit -m "docs: establish research protocol and literature notebook"
-git add pyproject.toml src tests scripts config benchmark data analysis .github
-git commit -m "feat: add validated research tooling and provenance smoke test"
-git add paper artifacts
-git commit -m "paper: add manuscript skeleton and infrastructure validation record"
 git status --short
+git diff --check
 git log --oneline -3
 ```
 
-The existing configured identity should be retained. Do not set a global identity, force history changes
-or add/push a remote as part of this handoff. The commands above have not succeeded in the restricted
-session, and the commit messages do not imply completed empirical research.
+Retain the existing configured identity and origin. Do not rewrite history or push without authorization.
+The source clone and database-test artifacts are distinct from coding-agent observations; commit names
+and paper prose must retain that distinction.

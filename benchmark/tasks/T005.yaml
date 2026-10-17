@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T005
 title: Bid cancellation and reservation release
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Select a cancellation extension while preserving reservation
   accounting.
 expected_behavior:
@@ -11,10 +11,19 @@ existing_invariants:
 - id: reservation-consistency
   definition: Reserved funds match active obligations according to the final specified
     policy.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/auction/service.go:221;
+    internal/auction/service_test.go:266; internal/guild/service.go:139
+relevant_repository_areas:
+- internal/auction/service.go
+- internal/auction/service_test.go
+- internal/guild/service.go
+- internal/postgres/auction_repo.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -32,7 +41,8 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: Highest-bid cancellation is already documented; a meaningful
-  extension and its policy remain to be chosen.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: AuctionServiceImpl.CancelBid already restricts cancellation
+  to the active highest bid and releases its reservation inside the transaction. A
+  cancellation service test exists.
+novel_change_assessment: Choose a reviewed extension to cancellation semantics; current
+  highest-bid cancellation is not a new task. Cross-day accounting has KNOWN-01.

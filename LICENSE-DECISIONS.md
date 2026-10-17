@@ -8,7 +8,7 @@ Git initialization and local use do not require assigning publication rights now
 | Original tooling | MIT or Apache-2.0 | Houtan Rocky to choose and confirm contribution rights |
 | Original prose/manuscript | CC BY 4.0 subject to venue requirements | Review supervisor/institution/venue policies |
 | Original released data | CC BY 4.0 or CC0 where rights permit | Review privacy, provider terms and attribution |
-| Third-party subject | README reports MIT | Verify pinned LICENSE; retain notices for redistributed patches/code |
+| Third-party subject | MIT LICENSE inspected at pinned commit 162c5cab9fa886445dd102f4a99961027f90aebb | Retain subject copyright/license notices for redistributed patches/code |
 | Papers/PDFs | Authors/publishers retain their terms | Store metadata/links; do not redistribute PDFs without permission |
 | Agent traces | Provider and input-content terms may apply | Redact credentials; verify release rights and consent |
 

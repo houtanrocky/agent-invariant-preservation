@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T008
 title: Transactional audit consistency
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Assess an audit-metadata extension while retaining transactional
   linkage.
 expected_behavior:
@@ -12,10 +12,19 @@ existing_invariants:
 - id: audit-coupling
   definition: Audit and financial effects commit atomically with cardinality specified
     by the task.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/guild/service.go:74; internal/postgres/guild_repo.go:15;
+    internal/postgres/research_test.go:318
+relevant_repository_areas:
+- internal/guild/service.go
+- internal/postgres/guild_repo.go
+- internal/postgres/research_test.go
+- migrations/up/000010_add_wallet_audit_and_daily_date.up.sql
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -33,7 +42,9 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README already describes append-only in-transaction wallet
-  auditing. Exact schema and new metadata are unverified.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: WalletServiceImpl.save updates wallet state then inserts
+  audit data through the shared transaction. Existing tests inspect audit counts and
+  rollback. The audit schema has no request/transaction correlation field.
+novel_change_assessment: Consider new correlation metadata with precisely specified
+  cardinality; current insertion coupling is already implemented. No blanket database-enforced
+  append-only guarantee is asserted.

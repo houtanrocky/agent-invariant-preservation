@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T002
 title: Retry-safe auction settlement
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Select an incremental settlement extension after reviewing existing
   worker behavior.
 expected_behavior:
@@ -10,10 +10,19 @@ expected_behavior:
 existing_invariants:
 - id: settlement-once
   definition: Settlement retry does not duplicate transfers or leave active reservations.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/auction/service.go:254,267;
+    internal/postgres/research_test.go:365
+relevant_repository_areas:
+- internal/auction/service.go
+- internal/auction/worker.go
+- internal/postgres/auction_repo.go
+- internal/postgres/research_test.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -31,7 +40,8 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README already claims retry/concurrent-worker safety. Reimplementing
-  that claim is not a new task.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: AuctionServiceImpl.EndAuction and EndExpiredAuctions already
+  perform transaction-wrapped settlement. TestResearchSettlement checks repeated/concurrent
+  settlement and persisted effects.
+novel_change_assessment: Retry safety alone is existing behavior; choose a new settlement
+  capability or retire this task.

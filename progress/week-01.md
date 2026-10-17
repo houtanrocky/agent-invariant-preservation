@@ -5,7 +5,7 @@ Status: planned; start/end dates and actual hours TO RECORD.
 ## Objectives and actionable checklist
 
 - [ ] Read closest full texts and update gap.
-- [ ] Pin and inspect baseline source and tests.
+- [x] Pin and inspect baseline source and tests. Evidence: docs/target-baseline.md and research/subject-inspection.md; KNOWN-01 limits task eligibility.
 - [ ] Map requirements to code/test evidence.
 - [ ] Validate two meaningful new tasks.
 - [ ] Verify one permitted dry run with complete provenance.

@@ -2,7 +2,7 @@ schema_version: '1.0'
 task_id: T006
 title: Failed transaction rollback
 kind: backend_change
-baseline_commit: null
+baseline_commit: 162c5cab9fa886445dd102f4a99961027f90aebb
 problem_description: Add a supported feature with a late failure path and require
   atomic rollback.
 expected_behavior:
@@ -11,10 +11,18 @@ expected_behavior:
 existing_invariants:
 - id: atomic-effects
   definition: No partial committed business effects remain after a failed operation.
-  source: PROPOSED REQUIREMENT; confirm using pinned source and tests
-relevant_repository_areas: []
+  source: 162c5cab9fa886445dd102f4a99961027f90aebb:internal/postgres/tx.go:33; internal/postgres/research_test.go:318
+relevant_repository_areas:
+- internal/postgres/tx.go
+- internal/order/service.go
+- internal/postgres/research_test.go
+- internal/idempotency/service.go
 setup_requirements:
-- Pin baseline; execute existing tests first
+- Clean detached checkout at the exact baseline SHA
+- Go 1.25.0 module requirement; recorded execution toolchain Go 1.26.0
+- Docker with Linux containers for isolated Testcontainers PostgreSQL; forward migrations
+  1 through 10
+- Review KNOWN-01 and public research-readiness material before accepting task scope
 evaluation_commands: []
 timeout_seconds: 300
 hidden_evaluation_requirements:
@@ -32,7 +40,8 @@ evidence:
   invariant: null
   mutant: null
   rationale: null
-availability_assessment: README claims rollback integration coverage. A concrete new
-  feature/failure point needs source inspection.
-novel_change_assessment: TO VERIFY that requested behavior is a meaningful new change,
-  not already implemented.
+availability_assessment: The transactor shares nested transactions through context.
+  TestResearchRollback injects a late order-update failure and checks persisted financial,
+  ownership, audit and idempotency state.
+novel_change_assessment: Rollback is existing tested behavior; select a genuinely
+  new feature/failure boundary and preserve this regression.
